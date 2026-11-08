@@ -1,0 +1,4 @@
+interface:
+  display_name: "Sketch"
+  short_description: "Quick, interactive interface sketches"
+  default_prompt: "Use $sketch to explore the specific interface element I want to refine; include a fuller screen or flow only if I ask for one."

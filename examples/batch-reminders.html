@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="color-scheme" content="light dark"><title>Batch reminder entry — Sketch by Mark Summer</title>
+<style>
+:root { color-scheme: light dark; }
+body { margin: 0; background: light-dark(#ffffff,#111111); color: light-dark(#111111,#f4f4f5); font: 400 15px/1.65 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; }
+main { max-width: 640px; margin: 64px auto; padding: 0 24px; }
+header p { color: light-dark(#71717a,#a1a1aa); }
+h1 { margin: 12px 0; font-size: 26px; font-weight: 500; letter-spacing: -.6px; }
+a { color: light-dark(#3f7261,#71c6ab); text-underline-offset: 4px; }
+#batch-reminders-sketch { padding-top: 24px; }
+footer { margin-top: 24px; color: light-dark(#71717a,#a1a1aa); }
+</style></head><body><main><header><a href="https://github.com/marksummer/skills">Sketch by Mark Summer</a><h1>Batch reminder entry</h1><p>Edit a row, press Enter, or paste several lines into a field.</p></header>
+<div id="batch-reminders-sketch" class="viz-dotted-background">
+  <section class="br-composer" aria-label="Batch reminder entry">
+    <h2>Reminders</h2>
+    <div class="br-rows"></div>
+    <button class="br-add cursor-interaction" type="button">＋ Add another reminder</button>
+    <span class="br-announcement" role="status" aria-live="polite"></span>
+  </section>
+</div>
+<style>
+  #batch-reminders-sketch { --br-bg: light-dark(#fafafa, #222224); --br-fg: light-dark(#29292c, #eeeeef); --br-muted: light-dark(#696970, #b1b1b7); --br-line: light-dark(#d9d9de, #45454b); font: 400 16px/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; color: var(--br-fg); padding: 56px 12px 24px; }
+  #batch-reminders-sketch * { box-sizing: border-box; }
+  #batch-reminders-sketch .br-composer { max-width: 430px; margin: auto; padding: 20px; background: var(--br-bg); border: 1px solid var(--br-line); border-radius: 12px; }
+  #batch-reminders-sketch h2 { margin: 0 0 16px; font-size: 18px; line-height: 1.4; font-weight: 500; }
+  #batch-reminders-sketch .br-row { display: flex; align-items: center; gap: 8px; border-bottom: 1px solid var(--br-line); }
+  #batch-reminders-sketch .br-marker { width: 16px; height: 16px; border: 1px solid var(--br-muted); border-radius: 50%; flex-shrink: 0; }
+  #batch-reminders-sketch input { width: 100%; min-width: 0; min-height: 52px; padding: 10px 2px; border: 0; background: transparent; color: var(--br-fg); font: inherit; text-overflow: ellipsis; }
+  #batch-reminders-sketch input::placeholder { color: var(--br-muted); opacity: 1; }
+  #batch-reminders-sketch button { background: transparent; border: 0; color: var(--br-fg); font: inherit; }
+  #batch-reminders-sketch .br-remove { flex-shrink: 0; width: 44px; min-height: 44px; color: var(--br-muted); font-size: 22px; }
+  #batch-reminders-sketch .br-add { margin-top: 12px; padding: 8px 0; min-height: 44px; text-align: left; }
+  #batch-reminders-sketch .br-announcement { position: absolute; width: 1px; height: 1px; padding: 0; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+  @media (max-width: 370px) { #batch-reminders-sketch .br-composer { padding: 16px; } }
+</style>
+<script>
+(() => {
+  const root = document.getElementById('batch-reminders-sketch');
+  const container = root.querySelector('.br-rows');
+  const status = root.querySelector('.br-announcement');
+  let items = ['Pick up coffee', 'Book a haircut', 'Send the project update'];
+  function save() {
+    if (window.openai?.setWidgetState) window.openai.setWidgetState({ modelContent: { reminders: items } }).catch(() => {});
+  }
+  function render(focusIndex) {
+    container.replaceChildren();
+    items.forEach((text, index) => {
+      const row = document.createElement('div');
+      row.className = 'br-row';
+      const marker = document.createElement('span');
+      marker.className = 'br-marker';
+      marker.setAttribute('aria-hidden', 'true');
+      const input = document.createElement('input');
+      input.type = 'text';
+      input.value = text;
+      input.placeholder = 'Add a reminder';
+      input.setAttribute('aria-label', `Reminder ${index + 1}`);
+      input.addEventListener('input', () => { items[index] = input.value; });
+      input.addEventListener('change', save);
+      input.addEventListener('keydown', event => {
+        if (event.key !== 'Enter' || event.isComposing) return;
+        event.preventDefault();
+        if (index === items.length - 1) items.push('');
+        render(index + 1);
+        save();
+      });
+      input.addEventListener('paste', event => {
+        const pasted = event.clipboardData.getData('text/plain');
+        if (!/[\r\n]/.test(pasted)) return;
+        event.preventDefault();
+        const lines = pasted.split(/\r\n|\r|\n/).map(line => line.trim()).filter(Boolean);
+        if (!lines.length) return;
+        const start = input.selectionStart ?? input.value.length;
+        const end = input.selectionEnd ?? start;
+        lines[0] = input.value.slice(0, start) + lines[0];
+        lines[lines.length - 1] += input.value.slice(end);
+        items.splice(index, 1, ...lines);
+        render(index + lines.length - 1);
+        status.textContent = `Pasted ${lines.length} reminder ${lines.length === 1 ? 'row' : 'rows'}.`;
+        save();
+      });
+      const remove = document.createElement('button');
+      remove.type = 'button';
+      remove.className = 'br-remove cursor-interaction';
+      remove.textContent = '×';
+      remove.setAttribute('aria-label', `Remove reminder ${index + 1}`);
+      remove.addEventListener('click', () => {
+        items.splice(index, 1);
+        if (!items.length) items.push('');
+        render(Math.min(index, items.length - 1));
+        status.textContent = 'Reminder row removed.';
+        save();
+      });
+      row.append(marker, input, remove);
+      container.append(row);
+    });
+    if (Number.isInteger(focusIndex)) {
+      const input = container.querySelectorAll('input')[focusIndex];
+      input.focus();
+      input.setSelectionRange(input.value.length, input.value.length);
+    }
+  }
+  root.querySelector('.br-add').addEventListener('click', () => {
+    items.push('');
+    render(items.length - 1);
+    status.textContent = 'New reminder row added.';
+    save();
+  });
+  function restore(state) {
+    const saved = state?.modelContent?.reminders;
+    if (Array.isArray(saved) && saved.length && saved.every(item => typeof item === 'string')) items = [...saved];
+    render();
+  }
+  window.addEventListener('openai:set_globals', event => {
+    if (event.detail?.globals?.widgetState) restore(event.detail.globals.widgetState);
+  });
+  restore(window.openai?.widgetState);
+})();
+</script>
+
+<footer>A focused, local demonstration based on an existing Aside feature. Changes stay in this page and reset when you reload.</footer></main></body></html>

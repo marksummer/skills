@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="336" viewBox="0 0 1200 336" role="img" aria-labelledby="title desc">
+  <title id="title">Skills by Mark Summer</title>
+  <desc id="desc">Faster exploration. Deliberate design.</desc>
+  <rect width="1200" height="336" fill="#ffffff"/>
+  <g transform="translate(48 40) scale(1.25)">
+    <path d="M22 3.667 28.667 17M9.333 3.667 16 17" fill="none" stroke="#3f7261" stroke-width="6.666667" stroke-linecap="round"/>
+    <path d="M3.333 14C5.174 14 6.667 15.493 6.667 17.333S5.174 20.667 3.333 20.667 0 19.174 0 17.333 1.493 14 3.333 14Z" fill="#3f7261" opacity=".43"/>
+  </g>
+  <g font-family="Inter, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif">
+    <text x="110" y="59" fill="#71717a" font-size="17">Skills by Mark Summer</text>
+    <text x="1152" y="59" text-anchor="end" fill="#3f7261" font-size="13" letter-spacing="1.4">DESIGN + DEVELOPMENT</text>
+    <text x="45" y="159" fill="#111111" font-size="66" font-weight="500" letter-spacing="-2.5">Faster exploration.</text>
+    <text x="45" y="233" fill="#111111" font-size="66" font-weight="500" letter-spacing="-2.5">Deliberate design.</text>
+    <text x="48" y="290" fill="#71717a" font-size="20">Reusable agent skills. Starting with Sketch.</text>
+  </g>
+  <path d="M48 328H1152" stroke="#e4e4e7"/>
+</svg>

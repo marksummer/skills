@@ -29,10 +29,24 @@ Sketch starts with the decision you need to make. It keeps the context needed to
 **The design question:** Can someone enter and edit several reminders without losing track of them?
 
 <picture>
+  <source media="(prefers-reduced-motion: reduce) and (prefers-color-scheme: dark)" srcset="assets/sketch-batch-dark.jpg">
+  <source media="(prefers-reduced-motion: reduce)" srcset="assets/sketch-batch-light.jpg">
+  <source media="(prefers-color-scheme: dark)" srcset="assets/sketch-batch-dark.gif">
+  <img alt="An eight-second walkthrough showing a reminder being added and typed, Enter creating the next row, a multiline list becoming two reminders, and an entry being removed." src="assets/sketch-batch-light.gif" width="560">
+</picture>
+
+An eight-second walkthrough of adding, typing, keyboard entry, multiline paste, and removal.
+
+<details>
+<summary>View a still preview</summary>
+
+<picture>
   <source media="(prefers-color-scheme: dark)" srcset="assets/sketch-batch-dark.jpg">
   <source media="(prefers-color-scheme: light)" srcset="assets/sketch-batch-light.jpg">
   <img alt="A focused reminder-entry sketch with three editable reminder rows, a remove control for each row, and an Add another reminder action." src="assets/sketch-batch-light.jpg" width="560">
 </picture>
+
+</details>
 
 This is a demonstration based on an existing feature in **Aside**, using the following prompt:
 

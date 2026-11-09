@@ -8,6 +8,12 @@
 
 Quick, interactive wireframes for faster design exploration. Focus on one element while keeping the content, hierarchy, and interactions needed to make thoughtful decisions. Ask for a full screen or flow when needed.
 
+## Clean Up
+
+Remove unnecessary UI, tighten copy, and improve layout while preserving useful behavior and the existing visual identity. Uses Impeccable when available and also works independently.
+
+[Usage and before/after example](clean-up/README.md) · [Skill instructions](clean-up/SKILL.md)
+
 ## Install
 
 ```sh
@@ -66,6 +72,7 @@ so I can tune its animation.
 [Download the example](https://raw.githubusercontent.com/marksummer/skills/main/examples/accent-picker.html) and open it in your browser. [Skill instructions](tune-motion/SKILL.md).
 
 
+
 ---
 
-Created by [Mark Summer](https://marksummer.com) · [Skill instructions](sketch/SKILL.md)
+Created by [Mark Summer](https://marksummer.com) · [Sketch instructions](sketch/SKILL.md) · [Clean Up instructions](clean-up/SKILL.md) · [Tune Motion instructions](tune-motion/SKILL.md)

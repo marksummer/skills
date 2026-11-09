@@ -1,0 +1,4 @@
+interface:
+  display_name: "Clean Up"
+  short_description: "Remove interface clutter and simplify copy"
+  default_prompt: "Use $clean-up to simplify this interface and improve its layout, using installed Impeccable guidance when available, then show a concise summary and before/after comparison."

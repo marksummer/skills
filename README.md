@@ -8,6 +8,12 @@
 
 Quick, interactive wireframes for faster design exploration. Focus on one element while keeping the content, hierarchy, and interactions needed to make thoughtful decisions. Ask for a full screen or flow when needed.
 
+## Clean Up
+
+Remove unnecessary UI, tighten copy, and improve layout while preserving useful behavior and the existing visual identity. Uses Impeccable when available and also works independently.
+
+[Usage and before/after example](clean-up/README.md) · [Skill instructions](clean-up/SKILL.md)
+
 ## Install
 
 ```sh
@@ -16,7 +22,7 @@ npx skills add marksummer/skills
 
 Requires Node.js. Run in your project and choose **Codex**.
 
-**Interactive previews require the Visualize plugin in Codex, installed separately.** Without it, Sketch provides a layout outline.
+**Sketch’s interactive previews require the Visualize plugin in Codex, installed separately.** Without it, Sketch provides a layout outline.
 
 ## Example: batch reminder entry
 
@@ -51,4 +57,4 @@ To iterate, ask to refine an element, compare approaches, or expand into a full 
 
 ---
 
-Created by [Mark Summer](https://marksummer.com) · [Skill instructions](sketch/SKILL.md)
+Created by [Mark Summer](https://marksummer.com) · [Sketch instructions](sketch/SKILL.md) · [Clean Up instructions](clean-up/SKILL.md)

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Tune Motion"
+  short_description: "Preview and tune component animations in chat"
+  default_prompt: "Use $tune-motion to preview an animation for the component I describe and let me tune it in chat."

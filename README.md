@@ -14,9 +14,9 @@ Quick, interactive wireframes for faster design exploration. Focus on one elemen
 npx skills add marksummer/skills
 ```
 
-Requires Node.js. Run in your project and choose **Codex**.
+Requires Node.js. Run in your project and choose **Codex** and the skills you want. Tune Motion’s preview generator also requires Python 3.
 
-**Interactive previews require the Visualize plugin in Codex, installed separately.** Without it, Sketch provides a layout outline.
+**Interactive previews require the Visualize plugin in Codex, installed separately.** Without it, Sketch provides a layout outline; Tune Motion needs the plugin for its interactive editor.
 
 ## Example: batch reminder entry
 
@@ -48,6 +48,23 @@ with adding, removing, and pasting multiple lines.
 [Download the example](https://raw.githubusercontent.com/marksummer/skills/main/examples/batch-reminders.html) and open it in your browser. It runs locally without a backend.
 
 To iterate, ask to refine an element, compare approaches, or expand into a full screen.
+
+## Tune Motion
+
+Describe a component and tune its animation in chat before implementing it. Try easing and spring presets, drag the curve, and adjust values while the interaction loops. Copy the complete specification, including property mappings and reference code, into your AI tool.
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="assets/tune-motion-dark.jpg">
+  <img alt="Tune Motion showing the accent picker, draggable motion curve, spring controls, and a live instruction with Copy." src="assets/tune-motion-light.jpg" width="560">
+</picture>
+
+```text
+Use $tune-motion to show the accent picker expanding and collapsing
+so I can tune its animation.
+```
+
+[Download the example](https://raw.githubusercontent.com/marksummer/skills/main/examples/accent-picker.html) and open it in your browser. [Skill instructions](tune-motion/SKILL.md).
+
 
 ---
 

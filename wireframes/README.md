@@ -11,6 +11,8 @@ The agent draws each screen once and packages everything as one self-contained H
 | Low-fi | Boxes and labels; body text becomes grey lines |
 | Structure | Each part of the screen as a labeled block, shaded by priority |
 
+The viewer uses local system fonts, with no external font downloads. Screenshots are embedded in the built HTML so it can be reviewed offline. Published Claude comment pins still require the Claude service.
+
 The page has a Screen view and an All screens view, numbered note pins, a full-screen Present mode, and keyboard shortcuts. When it is published as a Claude artifact, reviewers can also pin comments on any spot.
 
 It works from screenshots, Figma frames, web pages, HTML prototypes, Claude artifacts or a running app.

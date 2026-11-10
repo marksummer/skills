@@ -3,12 +3,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>{{TITLE}}</title>
 <meta name="claude:viewport-fit-sides" content="cover">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
 <style>
 /* Viewer chrome after Linear's DESIGN.md: one lavender accent (#5e6ad2) used only for the primary action, focus and note pins;
-   a surface ladder with hairlines instead of shadows; Inter as the stand-in for Linear's sans, JetBrains Mono for numbers.
+   a surface ladder with hairlines instead of shadows; local system sans and monospace fonts require no downloads.
    Dark follows the spec's tokens; light uses its inverse tokens with the same roles. */
 :root{
   --ground:#FFFFFF;        /* inverse-canvas */
@@ -29,8 +26,8 @@
   --warn:#C5372C;
   --paper-edge:0 0 0 1px rgba(15,16,17,.08), 0 1px 2px rgba(15,16,17,.04);
   --pop-shadow:0 12px 32px rgba(15,16,17,.14), 0 0 0 1px rgba(15,16,17,.06);
-  --font-ui:"Inter", "SF Pro Text", -apple-system, system-ui, "Segoe UI", Roboto, sans-serif;
-  --font-mono:"JetBrains Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  --font-ui:-apple-system, BlinkMacSystemFont, system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --font-mono:ui-monospace, "SFMono-Regular", "SF Mono", Menlo, Consolas, "Liberation Mono", monospace;
 }
 @media (prefers-color-scheme: dark){
   :root:not([data-theme="light"]){
@@ -392,7 +389,7 @@ body.presenting{overflow:hidden}
 /* ---------- Structure: only the named parts of the screen ---------- */
 .lv-struct *{visibility:hidden}
 .lv-struct .wf-zone,.lv-struct .wf-zone *,.lv-struct .wf-pin,.lv-struct .wf-hl{visibility:visible}
-.wf-zone{position:absolute;z-index:3;display:flex;flex-direction:column;align-items:flex-start;gap:4px;padding:10px 12px;border:1px solid #B9BCC3;border-radius:8px;overflow:hidden;background:#EEEFF2;color:#1C1C1F;font:400 13px/1.35 "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif}
+.wf-zone{position:absolute;z-index:3;display:flex;flex-direction:column;align-items:flex-start;gap:4px;padding:10px 12px;border:1px solid #B9BCC3;border-radius:8px;overflow:hidden;background:#EEEFF2;color:#1C1C1F;font:400 13px/1.35 var(--font-ui)}
 .wf-zone b{font-size:15px;line-height:1.25;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%}
 .wf-zone span{color:#5C5F66;display:-webkit-box;-webkit-box-orient:vertical;overflow:hidden}
 .wf-zone.p1{background:#D5D7DD;border-color:#26272B}
@@ -403,7 +400,7 @@ body.presenting{overflow:hidden}
 .wf-zone.is-narrow b{font-size:13px}
 
 /* ---------- Notes ---------- */
-.wf-pin{position:absolute;z-index:6;width:24px;height:24px;border-radius:50%;background:#5E6AD2;color:#FFFFFF;font:500 12px/24px "JetBrains Mono", ui-monospace, Menlo, monospace;text-align:center;box-shadow:0 0 0 2px #FFFFFF,0 2px 6px rgba(0,0,0,.25);transition:transform .15s ease}
+.wf-pin{position:absolute;z-index:6;width:24px;height:24px;border-radius:50%;background:#5E6AD2;color:#FFFFFF;font:500 12px/24px var(--font-mono);text-align:center;box-shadow:0 0 0 2px #FFFFFF,0 2px 6px rgba(0,0,0,.25);transition:transform .15s ease}
 .wf-hl{position:absolute;z-index:5;border:2px solid #5E6AD2;border-radius:8px;background:rgba(94,106,210,.08);opacity:0;transition:opacity .15s ease;pointer-events:none}
 .wf-hl.is-hot{opacity:1}
 .wf-pin.is-hot{transform:scale(1.18)}

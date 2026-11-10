@@ -14,6 +14,22 @@ Remove unnecessary UI, tighten copy, and improve layout while preserving useful 
 
 [Usage and before/after example](clean-up/README.md) · [Skill instructions](clean-up/SKILL.md)
 
+## Check Design System
+
+Audit iOS apps, other codebases, and Framer projects against `DESIGN.md` when present and the project's shared tokens and components. Find drift, group repeated issues, and get exact locations, existing replacements, coverage, and a before-and-after visual preview where tooling permits.
+
+Audits stay read-only unless you explicitly ask to implement fixes.
+
+```sh
+npx skills add marksummer/skills --skill check-design-system
+```
+
+```text
+Use $check-design-system to audit this project. Keep it read-only.
+```
+
+[Skill instructions](check-design-system/SKILL.md) · [Add verification to DESIGN.md and AGENTS.md](check-design-system/references/project-integration.md)
+
 ## Install
 
 ```sh
@@ -23,6 +39,8 @@ npx skills add marksummer/skills
 Requires Node.js. Run in your project and choose **Codex** and the skills you want. Tune Motion’s preview generator also requires Python 3.
 
 **Interactive previews require the Visualize plugin in Codex, installed separately.** Without it, Sketch provides a layout outline; Tune Motion needs the plugin for its interactive editor.
+
+Check Design System uses the available capture and rendering tools for comparisons. If a preview cannot be produced, it reports that limitation alongside the audit. Framer audits require a connected Framer MCP.
 
 ## Example: batch reminder entry
 
@@ -75,4 +93,4 @@ so I can tune its animation.
 
 ---
 
-Created by [Mark Summer](https://marksummer.com) · [Sketch instructions](sketch/SKILL.md) · [Clean Up instructions](clean-up/SKILL.md) · [Tune Motion instructions](tune-motion/SKILL.md)
+Created by [Mark Summer](https://marksummer.com) · [Sketch instructions](sketch/SKILL.md) · [Clean Up instructions](clean-up/SKILL.md) · [Tune Motion instructions](tune-motion/SKILL.md) · [Check Design System instructions](check-design-system/SKILL.md)

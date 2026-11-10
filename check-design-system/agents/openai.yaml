@@ -1,0 +1,4 @@
+interface:
+  display_name: "Check Design System"
+  short_description: "Audit design-system use across code and Framer"
+  default_prompt: "Use $check-design-system to audit this project read-only against DESIGN.md when present and its canonical definitions, then report prioritized findings, a before-and-after visual preview, existing replacements, coverage, and changes since a comparable prior audit."

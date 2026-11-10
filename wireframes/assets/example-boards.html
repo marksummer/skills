@@ -1,0 +1,97 @@
+<!--
+  Example boards file. Copy this shape: one <template> per screen, in flow order.
+  Build it with:  python3 scripts/build.py assets/example-boards.html --out /tmp/example.html --open
+  (No design images here, so the Design level shows a placeholder.)
+-->
+<meta name="title" content="Visits App">
+<meta name="summary" content="How a patient sees today's visit and books the next one">
+
+<template data-screen="today" data-name="Today" data-device="phone"
+          data-summary="Tells a patient what is next today and lets them get there or reschedule.">
+  <div class="wf-statusbar"></div>
+
+  <header class="wf-stack wf-pad" style="--gap:4px;padding-top:8px"
+          data-zone="Greeting" data-purpose="Confirms who is signed in and today's date" data-priority="3">
+    <p class="wf-meta">Tuesday, March 4</p>
+    <h1 class="wf-h1">Good morning, Sam</h1>
+  </header>
+
+  <section class="wf-pad" style="padding-top:4px"
+           data-zone="Next visit" data-purpose="The one thing to do today: get to the next visit on time" data-priority="1">
+    <div class="wf-card" style="--gap:12px">
+      <div class="wf-hstack">
+        <span class="wf-avatar">DR</span>
+        <div class="wf-item-body">
+          <p class="wf-text"><b>Dr. Rivera</b> · Physical therapy</p>
+          <p class="wf-meta">10:30 AM · Northside Clinic, Room 4</p>
+        </div>
+      </div>
+      <div class="wf-img" style="height:120px" data-label="Map"></div>
+      <div class="wf-hstack" style="--gap:8px">
+        <span class="wf-btn is-block" style="flex:1" data-note="Directions is the only primary action on the screen.">Get directions</span>
+        <span class="wf-btn is-secondary" style="flex:none">Reschedule</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="wf-stack wf-fill" style="--gap:6px;padding:8px 16px 0"
+           data-zone="Coming up" data-purpose="Lets the patient check later visits at a glance" data-priority="2">
+    <p class="wf-label">Coming up</p>
+    <div class="wf-list">
+      <div class="wf-item" style="padding-inline:0">
+        <span class="wf-icon" style="--size:36px"></span>
+        <div class="wf-item-body">
+          <p class="wf-text">Blood work</p>
+          <p class="wf-meta">Thu, Mar 6 · 8:00 AM</p>
+        </div>
+        <span class="wf-chevron"></span>
+      </div>
+      <div class="wf-item" style="padding-inline:0" data-note="Open question: show cancelled visits here or hide them?">
+        <span class="wf-icon" style="--size:36px"></span>
+        <div class="wf-item-body">
+          <p class="wf-text">Follow-up with Dr. Rivera</p>
+          <p class="wf-meta">Mon, Mar 10 · 2:15 PM</p>
+        </div>
+        <span class="wf-chevron"></span>
+      </div>
+    </div>
+  </section>
+
+  <nav class="wf-tabbar" data-zone="Tabs" data-purpose="Moves between Today, Visits, Messages and Profile" data-priority="3">
+    <span class="wf-tab is-active">Today</span>
+    <span class="wf-tab">Visits</span>
+    <span class="wf-tab">Messages</span>
+    <span class="wf-tab">Profile</span>
+  </nav>
+  <div class="wf-home"></div>
+</template>
+
+<template data-screen="reschedule" data-name="Reschedule" data-device="phone"
+          data-summary="Moves a visit to a new time without calling the clinic.">
+  <div class="wf-statusbar"></div>
+  <div class="wf-pad wf-stack wf-fill" style="--gap:16px;padding-top:24px">
+    <p class="wf-meta">Physical therapy · Dr. Rivera</p>
+  </div>
+  <div class="wf-scrim"></div>
+  <div class="wf-sheet" style="--gap:14px">
+    <div class="wf-stack" style="--gap:4px" data-zone="What is changing" data-purpose="Shows which visit is being moved" data-priority="2">
+      <h2 class="wf-h2">Pick a new time</h2>
+      <p class="wf-meta">Currently Tue, Mar 4 at 10:30 AM</p>
+    </div>
+    <div class="wf-stack" style="--gap:10px" data-zone="Open times" data-purpose="Offers the next open times so the patient can choose one" data-priority="1">
+      <div class="wf-segmented"><span class="is-selected">This week</span><span>Next week</span></div>
+      <div class="wf-grid" style="--cols:3;--gap:8px">
+        <span class="wf-chip">Wed 9:00</span>
+        <span class="wf-chip is-selected">Wed 1:30</span>
+        <span class="wf-chip">Thu 11:00</span>
+        <span class="wf-chip">Thu 3:45</span>
+        <span class="wf-chip">Fri 8:30</span>
+        <span class="wf-chip">Fri 2:00</span>
+      </div>
+    </div>
+    <div class="wf-stack" style="--gap:8px" data-zone="Confirm" data-purpose="Commits the change" data-priority="1">
+      <span class="wf-btn is-block" data-note="The clinic gets a message automatically; no phone call needed.">Move visit to Wed 1:30 PM</span>
+      <span class="wf-btn is-text" style="align-self:center">Keep current time</span>
+    </div>
+  </div>
+</template>

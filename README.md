@@ -30,13 +30,19 @@ Use $check-design-system to audit this project. Keep it read-only.
 
 [Skill instructions](check-design-system/SKILL.md) · [Add verification to DESIGN.md and AGENTS.md](check-design-system/references/project-integration.md)
 
+## Wireframes
+
+Turn a polished design into wireframes for stakeholder reviews. One self-contained HTML page switches between Design, Mid-fi, Low-fi and Structure, with Screen and All screens views, note pins and Present mode. Comment pins are available when published as a Claude artifact.
+
+[Setup and usage](wireframes/README.md) · [Skill instructions](wireframes/SKILL.md)
+
 ## Install
 
 ```sh
 npx skills add marksummer/skills
 ```
 
-Requires Node.js. Run in your project and choose **Codex** and the skills you want. Tune Motion’s preview generator also requires Python 3.
+Requires Node.js. Run in your project and choose **Codex** and the skills you want. Tune Motion’s preview generator also requires Python 3. Wireframes requires Python 3.9 or later; its `--snap` check also needs Chrome, Chromium, Edge or Brave.
 
 **Interactive previews require the Visualize plugin in Codex, installed separately.** Without it, Sketch provides a layout outline; Tune Motion needs the plugin for its interactive editor.
 
@@ -91,6 +97,10 @@ so I can tune its animation.
 
 
 
+## License
+
+This repository is licensed under the [MIT License](LICENSE).
+
 ---
 
-Created by [Mark Summer](https://marksummer.com) · [Sketch instructions](sketch/SKILL.md) · [Clean Up instructions](clean-up/SKILL.md) · [Tune Motion instructions](tune-motion/SKILL.md) · [Check Design System instructions](check-design-system/SKILL.md)
+Created by [Mark Summer](https://marksummer.com) · [Sketch instructions](sketch/SKILL.md) · [Clean Up instructions](clean-up/SKILL.md) · [Tune Motion instructions](tune-motion/SKILL.md) · [Check Design System instructions](check-design-system/SKILL.md) · [Wireframes instructions](wireframes/SKILL.md)

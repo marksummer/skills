@@ -20,10 +20,6 @@ Audit iOS apps, other codebases, and Framer projects against `DESIGN.md` when pr
 
 Audits stay read-only unless you explicitly ask to implement fixes.
 
-```sh
-npx skills add marksummer/skills --skill check-design-system
-```
-
 ```text
 Use $check-design-system to audit this project. Keep it read-only.
 ```

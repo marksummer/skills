@@ -1,36 +1,20 @@
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="assets/header-dark.svg">
   <source media="(prefers-color-scheme: light)" srcset="assets/header-light.svg">
-  <img alt="Skills by Mark Summer — Faster exploration. Deliberate design." src="assets/header-light.svg" width="1200">
+  <img alt="Skills by Mark Summer. Faster exploration. Deliberate design." src="assets/header-light.svg" width="1200">
 </picture>
 
-## Sketch
+Five skills I use to work through interface ideas, simplify screens, and check the details.
 
-Quick, interactive wireframes for faster design exploration. Focus on one element while keeping the content, hierarchy, and interactions needed to make thoughtful decisions. Ask for a full screen or flow when needed.
+## Choose a skill
 
-## Clean Up
-
-Remove unnecessary UI, tighten copy, and improve layout while preserving useful behavior and the existing visual identity. Uses Impeccable when available and also works independently.
-
-[Usage and before/after example](clean-up/README.md) · [Skill instructions](clean-up/SKILL.md)
-
-## Check Design System
-
-Audit iOS apps, other codebases, and Framer projects against `DESIGN.md` when present and the project's shared tokens and components. Find drift, group repeated issues, and get exact locations, existing replacements, coverage, and a before-and-after visual preview where tooling permits.
-
-Audits stay read-only unless you explicitly ask to implement fixes.
-
-```text
-Use $check-design-system to audit this project. Keep it read-only.
-```
-
-[Skill instructions](check-design-system/SKILL.md) · [Add verification to DESIGN.md and AGENTS.md](check-design-system/references/project-integration.md)
-
-## Wireframes
-
-Turn a polished design into wireframes for stakeholder reviews. One self-contained HTML page switches between Design, Mid-fi, Low-fi and Structure, with Screen and All screens views, note pins and Present mode. Comment pins are available when published as a Claude artifact.
-
-[Setup and usage](wireframes/README.md) · [Skill instructions](wireframes/SKILL.md)
+| Skill | Use it to |
+| --- | --- |
+| [Sketch](sketch/README.md) | Explore an interface idea with an interactive sketch. |
+| [Clean up](clean-up/README.md) | Remove clutter, tighten copy, and improve an existing layout. |
+| [Tune motion](tune-motion/README.md) | Try an animation and adjust it in chat. |
+| [Check design system](check-design-system/README.md) | Find where UI has drifted from the project's design system. |
+| [Wireframes](wireframes/README.md) | Turn an existing design into wireframes for review. |
 
 ## Install
 
@@ -38,15 +22,21 @@ Turn a polished design into wireframes for stakeholder reviews. One self-contain
 npx skills add marksummer/skills
 ```
 
-Requires Node.js. Run in your project and choose **Codex** and the skills you want. Tune Motion’s preview generator also requires Python 3. Wireframes requires Python 3.9 or later; its `--snap` check also needs Chrome, Chromium, Edge or Brave.
+Run this in your project, then choose Codex and the skills you want. Requires Node.js.
 
-**Interactive previews require the Visualize plugin in Codex, installed separately.** Without it, Sketch provides a layout outline; Tune Motion needs the plugin for its interactive editor.
+| Skill | What else you need |
+| --- | --- |
+| Sketch | The Visualize plugin in Codex for interactive previews. Without it, you get a layout outline. |
+| Clean up | No extra dependency. Uses Impeccable when it is already installed. |
+| Tune motion | The Visualize plugin in Codex and Python 3 for the preview generator. |
+| Check design system | Available capture and rendering tools for visual comparisons. Framer audits need a connected Framer MCP. |
+| Wireframes | Python 3.9 or later. Snapshot checks also need Chrome, Chromium, Edge, or Brave. |
 
-Check Design System uses the available capture and rendering tools for comparisons. If a preview cannot be produced, it reports that limitation alongside the audit. Framer audits require a connected Framer MCP.
+Install Visualize separately. Each skill's usage page covers its requirements and limits.
 
-## Example: batch reminder entry
+## Sketch example
 
-Can someone add and edit several reminders without losing track? This demo, based on **Aside**, explores editable rows, keyboard entry, and multiline paste.
+This reminder-entry sketch, based on Aside, lets you add and edit rows, press Enter for another reminder, and paste several lines at once.
 
 <picture>
   <source media="(prefers-reduced-motion: reduce) and (prefers-color-scheme: dark)" srcset="assets/sketch-batch-dark.jpg">
@@ -71,13 +61,13 @@ Use $sketch to explore batch reminder entry: one editable row per reminder,
 with adding, removing, and pasting multiple lines.
 ```
 
-[Download the example](https://raw.githubusercontent.com/marksummer/skills/main/examples/batch-reminders.html) and open it in your browser. It runs locally without a backend.
+[Download the example](https://raw.githubusercontent.com/marksummer/skills/main/examples/batch-reminders.html) and open it in your browser. It runs locally without a backend. Ask to refine an element, compare options, or expand the sketch into a screen.
 
-To iterate, ask to refine an element, compare approaches, or expand into a full screen.
+[Usage](sketch/README.md) · [Instructions](sketch/SKILL.md)
 
-## Tune Motion
+## Tune motion example
 
-Describe a component and tune its animation in chat before implementing it. Try easing and spring presets, drag the curve, and adjust values while the interaction loops. Copy the complete specification, including property mappings and reference code, into your AI tool.
+Try the accent picker opening and closing. Adjust the easing or spring, drag the curve, and copy the full motion specification when it feels right.
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="assets/tune-motion-dark.jpg">
@@ -89,14 +79,10 @@ Use $tune-motion to show the accent picker expanding and collapsing
 so I can tune its animation.
 ```
 
-[Download the example](https://raw.githubusercontent.com/marksummer/skills/main/examples/accent-picker.html) and open it in your browser. [Skill instructions](tune-motion/SKILL.md).
+[Download the example](https://raw.githubusercontent.com/marksummer/skills/main/examples/accent-picker.html) and open it in your browser.
 
-
+[Usage](tune-motion/README.md) · [Instructions](tune-motion/SKILL.md)
 
 ## License
 
-This repository is licensed under the [MIT License](LICENSE).
-
----
-
-Created by [Mark Summer](https://marksummer.com) · [Sketch instructions](sketch/SKILL.md) · [Clean Up instructions](clean-up/SKILL.md) · [Tune Motion instructions](tune-motion/SKILL.md) · [Check Design System instructions](check-design-system/SKILL.md) · [Wireframes instructions](wireframes/SKILL.md)
+[MIT](LICENSE). Created by [Mark Summer](https://marksummer.com).

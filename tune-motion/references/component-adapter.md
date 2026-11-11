@@ -1,31 +1,35 @@
 # Component adapter
 
-Create two small files. The helper injects both into a copy of the editor; do not rebuild its controls or motion engine. No frontend framework or build step is needed.
+Write a markup file and an adapter file. The helper inserts them into a copy of the editor, reusing its controls and motion engine. No frontend framework or build step is required.
 
 ## Markup
 
-`--markup` is passive HTML and root-scoped CSS placed inside the preview scene. Scope styles under `#motion-playground [data-motion-component]`. Do not include document wrappers, scripts, inline event handlers or dependencies. Leave the editor's `mp-` IDs alone; use component-specific attributes for queries.
+`--markup` accepts passive HTML and root-scoped CSS for the preview scene. Scope styles under `#motion-playground [data-motion-component]`. Omit document wrappers, scripts, inline event handlers, and dependencies. Leave `mp-` IDs for the editor and use component-specific attributes for queries.
 
 ## Renderer
 
-`--adapter` is a JavaScript function body, executed once inside the editor's closure. It must **return a function** `(progress, context) => { ... }` that sets the visible pose.
+`--adapter` is a JavaScript function body that runs once inside the editor's closure. Return a function `(progress, context) => { ... }` that sets the visible pose.
 
-`preview` provides:
+The `preview` interface provides:
 
-- `scene`: the scene element; measure it for responsive positioning.
-- `query(selector)`: query inside that scene.
-- `replay()`: replay the complete interaction from rest.
-- `properties`: set this to a JSON-serializable mapping of animated properties and endpoints. It is included in saved/exported motion settings.
+| Member | Purpose |
+| --- | --- |
+| `scene` | Scene element, available for responsive measurements. |
+| `query(selector)` | Query within the scene. |
+| `replay()` | Replay the full interaction from rest. |
+| `properties` | JSON-serializable property and endpoint mappings included in saved and exported settings. |
 
-`progress` is the component's absolute pose: 0 is resting, 1 is active. It may be below 0 or above 1 with Back curves or springs; on the return leg it moves from 1 to 0. Use it for geometry, not just an unrelated diagnostic marker.
+`progress` is the absolute pose: 0 at rest and 1 active. Back curves and springs can go below 0 or above 1. The return leg moves from 1 to 0. Use it to drive the component geometry.
 
-`context` contains `phase` (`opening`, `open`, `closing`, `closed`), `elapsedMs` within the passage, `durationMs`, `reducedMotion`, and `sample(ms)`, the same forward easing function used by the graph. Elapsed time is pinned to the completed passage during either endpoint hold. Prefer the simple absolute progress for a single transition. If choreography is necessary, fit offsets within this controlled duration and invert sampled poses on return; do not start another timer.
+`context` contains `phase` (`opening`, `open`, `closing`, `closed`), `elapsedMs` within the passage, `durationMs`, `reducedMotion`, and `sample(ms)`, the graph's forward easing function. Endpoint holds pin elapsed time to the completed passage.
 
-Set up listeners once outside the returned function. Set styles, attributes and text inside it; do not replace interactive DOM every frame. Native custom value fields are the keyboard alternative to graph dragging.
+For a single transition, use absolute progress. If choreography is needed, fit offsets within the controlled duration and invert sampled poses on return. Do not start another timer.
 
-## Example: expandable card
+Set up listeners once outside the returned function. Update styles, attributes, and text inside it without replacing interactive DOM each frame. Native custom-value fields provide a keyboard alternative to curve dragging.
 
-Markup:
+## Example
+
+Expandable-card markup:
 
 ```html
 <div data-motion-component>
@@ -54,12 +58,26 @@ return progress => {
 };
 ```
 
-Use realistic content from the actual brief instead of this example copy. Adjust the scene height when the described component needs more room; change the copied preview, not the installed template.
+Replace the sample content with the brief's actual content. Allow enough scene height for the component. Change the generated copy, leaving the installed template intact.
 
-## Generation options
+## Generator options
 
-`--preset` accepts any built-in easing or spring enum in the editor, such as `EASE_OUT` or `BOUNCY`. Default is `EASE_OUT`. `--duration` sets a Bézier duration in milliseconds (default 300); spring duration is derived from its physical parameters, so do not supply both a spring preset and `--duration`. Users can customize every value in the resulting editor.
+`--preset` accepts a built-in easing or spring enum, such as `EASE_OUT` or `BOUNCY`; the default is `EASE_OUT`.
 
-`--key` sets a stable component identity for persisted settings; it defaults to the name's slug. Reuse it when revising the same component. A saved snapshot from a different component key is ignored. `--force` explicitly replaces an existing generated output.
+`--duration` sets Bézier duration in milliseconds, defaulting to 300. Spring duration comes from its physical parameters, so do not combine a spring preset with `--duration`. The editor lets users customize all values.
 
-The compact instruction summarizes the component and current motion. Copy includes the complete inspectable specification, with full-precision parameters, property mapping, initial scene markup/styles, the actual adapter factory, its layout helper and the actual analytic spring/inverse-Bezier sampler source. Keep the adapter self-contained: use preview and the supplied context; the included layout/q helper is available for the template. Do not depend on other outer editor variables, external assets or independent clocks. Record any additional constants inside the adapter and give the component explicit geometry/transform origins. The saved model state also includes component identity and the full property mapping. The demo's layout, hold pauses and Slow/Loop choices are preview controls, not implementation requirements.
+`--key` sets the component identity used for persistence. It defaults to the name's slug. Reuse it for revisions; snapshots from another key are ignored.
+
+`--force` replaces an existing generated output.
+
+## Export
+
+The compact instruction describes the component and current motion. Copy includes the inspectable full specification with:
+
+- Parameters at full precision, property mappings, and initial scene markup/styles.
+- The actual adapter factory and layout helper.
+- The actual analytic spring/inverse-Bezier sampler source.
+
+Keep the adapter self-contained with `preview` and the supplied context. The template's included layout/q helper is also available. Avoid other outer editor variables, external assets, and independent clocks. Put additional constants inside the adapter and define geometry and transform origins explicitly.
+
+Saved model state includes the component identity and full property mapping. Layout, endpoint holds, and Slow/Loop choices belong to the preview and do not become product requirements.

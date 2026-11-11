@@ -1,16 +1,12 @@
-# Clean Up
+# Clean up
 
-Clean Up simplifies an existing interface by removing unnecessary UI, tightening copy, and improving local layout while preserving behavior, accessibility, and the product's visual identity.
+Remove clutter, tighten copy, and improve an existing layout. Keep the behavior, accessibility, and visual identity that make the screen useful.
 
 ## Install
 
-```sh
-npx skills add marksummer/skills
-```
+Follow the [installation steps](../README.md#install) and choose Clean Up.
 
-Choose **Clean Up** and **Codex**. Requires Node.js.
-
-You can also copy this `clean-up` folder into `~/.codex/skills/` manually.
+You can also copy this `clean-up` folder into `~/.codex/skills/` manually. Impeccable is optional: the skill uses its distill guidance, and layout guidance when relevant, if it is already installed. It is not bundled or installed automatically.
 
 ## Use
 
@@ -24,19 +20,17 @@ For copy-only work:
 $clean-up Simplify the copy on this screen. Keep all layout, styling, and behavior unchanged.
 ```
 
-Provide the screen, source, or relevant project context. Clean Up honors explicit scope constraints and shows a compact before/after comparison with the verification performed.
+Provide the screen, source, or project context. State any limits on what can change.
 
-## Optional Impeccable guidance
+## What you get
 
-When Impeccable is already installed and available, Clean Up reads that installed skill and follows its **distill** guidance, plus **layout** guidance when arrangement contributes to clutter. Impeccable is not bundled or installed automatically. Clean Up also works without it.
+A simpler screen and a compact before-and-after comparison, with a summary of the changes and what was checked. If captures are unavailable, the comparison uses source or text.
 
-## Example: upload screen
+## Example
 
-This example is a **local prototype with simulated transfers**. It illustrates interface cleanup; it does not demonstrate a production upload service.
+This upload-screen prototype uses simulated transfers. The cleanup was made with Impeccable available.
 
-The after example uses Clean Up with Impeccable available.
-
-The revised screen groups the filename with its size and file limits, moves the change action beside the file, and gives the upload action more emphasis. Destination selection and sharing information remain visible.
+The revised layout groups the filename with its size and file limits, puts Change beside the file, and gives Upload file more emphasis. Destination selection and sharing information stay visible.
 
 ### Before
 
@@ -58,3 +52,5 @@ The revised screen groups the filename with its size and file limits, moves the 
 ![After upload screen in dark appearance](../assets/clean-up/after-dark.jpg)
 
 </details>
+
+[Instructions](SKILL.md) · [All skills](../README.md)

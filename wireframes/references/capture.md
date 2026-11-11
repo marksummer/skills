@@ -1,33 +1,33 @@
-# Getting the design as images
+# Capture the design
 
-The Design level is the anchor: stakeholders flip from it to the wireframes and back. Get one image per screen, in the order the flow runs, and save them in a `shots/` folder next to the boards file. PNG or JPEG both work.
+Save one image per screen in flow order in a `shots/` folder beside the boards file. PNG and JPEG both work. These images provide the Design view for comparison.
 
-After collecting them, run the measure helper to learn the size to draw each board at:
+Measure the files before drawing:
 
 ```bash
 python3 <skill-dir>/scripts/build.py --measure shots/*.png
 # shots/home.png: 1206 x 2622 px | as phone: 402 pt wide at @3x, board height 874
 ```
 
-Draw the board at that point width (set `data-width` when it is not 390), and convert any pixel position you read off the image by dividing by the scale factor.
+Use the reported point width for the board. Set `data-width` if it differs from 390. Divide pixel measurements by the image scale factor.
 
-## Image files the user gave you
+## Supplied images
 
-Copy them into `shots/` with short names in flow order (`01-home.png`, `02-new-timesheet.png`). If they are pasted into the chat rather than saved, ask for the files or a folder path; the build needs files on disk.
+Copy files into `shots/` with short names in flow order, such as `01-home.png` and `02-new-timesheet.png`. If images are pasted in chat and cannot be saved, ask for files or a folder path. The build needs images on disk.
 
 ## Figma
 
-If a Figma MCP server is connected:
+With a connected Figma MCP:
 
-1. Get the frame node ids from the URL (`node-id=12-345` means `12:345`) or with the metadata tool.
-2. Use the screenshot tool for each frame and save the image to `shots/`. If the tool only returns the image inline and you cannot save it, ask the user to export the frames at 2x (select frames, Export, PNG 2x) into a folder.
-3. Use the design-context or metadata tool for exact positions, sizes and text. Figma frames are already in points: take each top-level layer's y and height and use them directly as the region's margin and height. This replaces most measuring and makes the Design to Mid-fi toggle line up on the first build.
+1. Get frame node IDs from the URL or metadata tool. `node-id=12-345` corresponds to `12:345`.
+2. Capture each frame and save it to `shots/`. If the tool only returns inline images that cannot be saved, ask for PNG exports at 2x.
+3. Use design context or metadata for positions, sizes, and text. Figma frames use points, so top-level layer y positions and heights can supply region margins and heights directly.
 
-Without the MCP, ask the user to export the frames at 2x.
+Without MCP, ask for frame exports at 2x.
 
-## A web page, local HTML file or HTML prototype
+## Web pages and HTML
 
-Use a browser automation tool if your environment has one that can save screenshots. Otherwise headless Chrome works anywhere Chrome is installed:
+Use a browser tool that can save screenshots. If none is available, use installed headless Chrome:
 
 ```bash
 # macOS; on Linux use google-chrome or chromium
@@ -36,26 +36,28 @@ Use a browser automation tool if your environment has one that can save screensh
   --screenshot=shots/home.png "https://example.com/page"
 ```
 
-Use `--window-size=1440,900` for desktop pages. For a full-length page, raise the height to the page height. If the page needs a click to reach a state, use Playwright (`npx playwright screenshot ...`) or ask the user for screenshots.
+For desktop, use `--window-size=1440,900`. For a full page, set the height to the page height. If a state needs a click, use Playwright (`npx playwright screenshot ...`) or ask for screenshots.
 
-## A Claude artifact link
+## Claude artifacts
 
-Read it with the Artifact tool (`action: read`), save the HTML to a file, then screenshot that file with headless Chrome as above. If the artifact draws several screens on one page, screenshot at a size that shows one screen, or crop.
+Read the link with the Artifact tool (`action: read`), save the HTML, and capture the file with headless Chrome. If it contains several screens, size the capture to one screen or crop it.
 
-## A running iOS app
+## Running iOS apps
+
+Navigate to each screen before capturing:
 
 ```bash
 xcrun simctl io booted screenshot shots/home.png
 ```
 
-Navigate to each screen first (deep links: `xcrun simctl openurl booted '<scheme>://...'`). Simulator screenshots are @3x on current iPhones (402 pt wide on an iPhone 17 Pro).
+Deep links can use `xcrun simctl openurl booted '<scheme>://...'`. Current iPhone Simulator captures use @3x; an iPhone 17 Pro is 402pt wide.
 
-## A running Android app
+## Running Android apps
 
 ```bash
 adb exec-out screencap -p > shots/home.png
 ```
 
-## Only code, no running app
+## Source without a running app
 
-Ask whether the user can run it or share screenshots. If neither is possible and they accept it, draw the boards from the code and leave out `data-design`; the Design level then shows a placeholder. Say so in your reply.
+Ask whether the user can run the app or provide screenshots. If neither is possible and they agree, draw from source and omit `data-design`. The Design view will show a placeholder; explain that in the reply.

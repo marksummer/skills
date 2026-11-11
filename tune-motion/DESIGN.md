@@ -1,12 +1,12 @@
-# Tune Motion — Linear-inspired UI
+# Tune motion editor
 
-A small, precise motion editor. The component is the subject; the controls are quiet tools around it.
+Keep the component central and the controls simple.
 
-Inspired by [Linear's approach to a cohesive, neutral interface](https://linear.app/now/how-we-redesigned-the-linear-ui). This is a local design specification, not an official Linear theme or a reproduction of its private tokens.
+The editor takes direction from [Linear's neutral interface](https://linear.app/now/how-we-redesigned-the-linear-ui). These are local design rules, not official Linear tokens or a reproduction of its private theme.
 
-## Surface and color
+## Color and surfaces
 
-Use the theme-aware `--mp-` tokens in `assets/editor.html`. No gradients, glass, shadows, ornamental icons or extra cards.
+Use the theme-aware `--mp-` tokens in `assets/editor.html`. Leave out gradients, glass, shadows, decorative icons, and extra cards.
 
 | Token | Light | Dark |
 | --- | --- | --- |
@@ -18,28 +18,36 @@ Use the theme-aware `--mp-` tokens in `assets/editor.html`. No gradients, glass,
 | Divider | `#e4e5e9` | `#303138` |
 | Motion accent | `#5e63cc` | `#a5a9ff` |
 
-Keep the motion accent on curve strokes, handles, native range/checkbox states and focus. Play uses a neutral ink fill. Preserve the depicted component's own colors; selecting an accent in a component must not recolor the editor.
+Use the motion accent for curve strokes, handles, native range and checkbox states, and focus. Give Play a neutral ink fill. Preserve the component's colors; changing an accent inside it must not recolor the editor.
 
-## Type and geometry
+## Type and spacing
 
-Use Inter when available, then the platform sans-serif. Do not add a font download for this small editor. Title: 14px, 500 weight, 20px line height. Fields: 13px. Labels, buttons, graph annotations: 12px. Numeric inputs use tabular figures. Spring controls and summary values show at most one decimal place, without trailing .0; retain full precision internally and in the full copied specification. Keep labels readable; never shrink them to make an overcrowded row fit.
+Use Inter when available, then the platform sans-serif. Do not download a font for the editor.
 
-Use an 18px desktop inset and 14px narrow inset. Main vertical groups use 12–16px spacing; related field parts use 6–8px. Outer radius: 10px. Preview and controls: 6px. Borders are 1px; depth comes from neutral surface differences, not shadows.
+| Element | Size |
+| --- | --- |
+| Title | 14px, 500 weight, 20px line height |
+| Fields | 13px |
+| Labels, buttons, and graph annotations | 12px |
 
-## Composition
+Use tabular figures in numeric inputs. Show spring controls and summary values to at most one decimal place, without trailing .0. Keep full precision internally and in the copied specification. Rearrange crowded rows instead of shrinking labels.
+
+Use 18px outer padding on desktop and 14px at narrow widths. Space main groups 12 to 16px apart and related field parts 6 to 8px apart. Use a 10px outer radius, 6px for the preview and controls, and 1px borders. Separate surfaces with neutral color differences.
+
+## Layout
 
 - Header: component name.
-- Settings: Easing plus a compact Duration row containing the numeric value, ms unit and live slider.
-- One generous preview, then Play at left and Loop/Slow at right.
-- One directly editable curve below a subtle divider. Custom values appear only while customizing.
-- A compact instruction updates live below the curve and custom values. One Copy button copies the complete specification, including reference code. Keep that read-only text inspectable under Full specification; no Draft or Refresh action. Let expanded text grow to fit without internal scrolling.
+- Settings: Easing and a compact Duration row with the value, ms unit, and live slider.
+- One roomy preview, followed by Play on the left and Loop/Slow on the right.
+- One editable curve below a subtle divider. Show custom values only while customizing.
+- A compact live instruction below the curve and custom values. Copy exports the complete specification and reference code. Keep that read-only text inspectable under Full specification and let it expand without internal scrolling. Do not add Draft or Refresh.
 
-Do not add subtitles, repeated preset headings, phase/progress readouts, direction menus, comparisons, explanatory copy, metrics or extra settings panels by default.
+Leave out subtitles, repeated preset headings, progress displays, direction menus, comparisons, explanatory copy, metrics, and extra settings panels unless requested.
 
-## Responsive and interactive details
+## Responsive behavior
 
-Stack the settings below 400px. Let custom Bézier values form two columns on narrow widths. Keep three spring columns on fine pointers; on narrow touch surfaces use labelled rows with a value and slider. Touch controls retain 44px targets and 16px editable text. Avoid horizontal scrolling and clipped numbers.
+Stack settings below 400px. Use two columns for custom Bézier values at narrow widths. Keep three spring columns with fine pointers. On narrow touch screens, use labeled rows with a value and slider. Keep touch targets at 44px and editable text at 16px. Prevent horizontal scrolling and clipped numbers.
 
-Use native controls and visible focus rings. Hover may strengthen a field border or neutral fill. Preserve disabled states, text selection, native keyboard entry and copy feedback. Appearance follows the host.
+Use native controls and visible focus rings. Hover can strengthen a border or neutral fill. Preserve disabled states, selection, keyboard entry, and copy feedback. Follow the host appearance.
 
-Styling must not change the animation sampler, live editing, loop phase, explicit pause, reduced-motion handling, saved component identity or property mapping. A restyle should preserve the user's selected motion. Keep any changes to the example component separate from editor styling.
+Styling changes must preserve the sampler, live editing, loop phase, explicit pause, reduced-motion handling, saved component identity, property mapping, and selected motion. Keep example-component changes separate from editor styling.

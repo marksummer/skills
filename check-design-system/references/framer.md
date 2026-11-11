@@ -1,33 +1,33 @@
-# Framer MCP adapter
+# Framer audit
 
-## Open the authorized target
+## Open the target
 
-Use Framer MCP. Discover its currently available tools. Open the explicitly selected project/branch with `open_project`, or reuse a session already verified for that exact target. Read the returned README, then `context.md` and listed documentation applicable to tree traversal, styles/tokens, components/variants, code files, and any needed rendering capability.
+Use Framer MCP and discover its available tools. Open the selected project and branch with `open_project`, or reuse a session verified for that exact target. Read the returned README, then `context.md` and applicable documentation for trees, styles, tokens, components, variants, code, and rendering.
 
-Verify project identity and branch from session/project data before traversal or changes. Follow user/workspace defaults and protected-project restrictions; never infer authorization from recently opened projects. If no target is established, ask for the project link while continuing independent work.
+Verify project and branch identity from session data before traversal or changes. Follow workspace defaults and protected-project restrictions. Recently opened projects do not establish authorization. If the target is unknown, ask for its link while continuing independent work.
 
-Do not use `@framer/agent`, its CLI, or its Framer skills as a fallback. Do not guess APIs or property names; use current MCP documentation. Report access limits if a required read capability is unavailable.
+Use current MCP documentation for APIs and properties. Do not fall back to `@framer/agent`, its CLI, or its Framer skills. Report missing read capabilities.
 
-## Inventory
+## Inventory the project
 
-Use documented read APIs to inventory pages, reachable layer trees, breakpoints, components, variants, shared styles/variables, and code components/overrides. Include hidden/conditional layers where readable. Distinguish definitions, instances, and overrides. Do not count a shared component's internal definition repeatedly as separate definitions.
+Use documented read APIs to list pages, reachable layers, breakpoints, components, variants, shared styles and variables, and code components or overrides. Include hidden and conditional layers when readable. Distinguish definitions, instances, and overrides; count each shared definition once.
 
-Batch reads where supported and complete pagination. Track stable IDs and visited definitions. Avoid repeated full-project dumps; retrieve details at suspicious properties and override boundaries. Do not generate or execute writes during an audit.
+Batch supported reads, complete pagination, and track stable IDs and visited definitions. Fetch details around suspicious properties and override boundaries instead of repeating full-project dumps. Do not generate or execute writes during an audit.
 
-## Inspect
+## Inspect the UI
 
-- Establish linkage to shared styles, variables, and components from reference metadata where available.
-- Distinguish allowed property controls from unsupported overrides. Treat identical-looking standalone layers as duplication candidates, not proof of detachment.
-- Compare typography, fills, strokes, radii, effects, spacing, layout, and motion against the system when exposed.
-- Inspect breakpoint and variant overrides before claiming cross-state conformance.
-- Read code components/overrides through MCP where supported. Trace project-owned references and prop overrides using codebase reasoning; do not switch to a separate Framer CLI.
-- Never infer reference membership from resolved colors/fonts alone. If MCP exposes resolved values only, mark linkage unverified and state what can still be compared.
-- Respect unique artwork, CMS-bound content, responsive geometry, and exceptions. Inspect CMS templates structurally; claim individual CMS-page coverage only for pages actually enumerated and inspected.
+- Use reference metadata to establish links to shared styles, variables, and components.
+- Distinguish allowed property controls from unsupported overrides. Identical-looking standalone layers are duplication candidates; appearance alone does not prove detachment.
+- Compare exposed typography, fills, strokes, radii, effects, spacing, layout, and motion with the system.
+- Check breakpoint and variant overrides before making cross-state claims.
+- Read code components and overrides through MCP when supported. Trace project-owned references and prop overrides using codebase reasoning. Keep access through MCP.
+- If only resolved colors or fonts are exposed, mark reference linkage unverified and explain which comparisons remain possible.
+- Respect artwork, CMS content, responsive geometry, and exceptions. Inspect CMS templates structurally; claim individual page coverage only for pages enumerated and inspected.
 
-## Verify
+## Verify findings
 
-Locate findings with page names and stable node/component IDs, adding layer paths/source locations where supported. List inaccessible internals, variants, styles, and files.
+Locate findings by page and stable node/component ID. Add layer paths and source locations when available. List inaccessible internals, variants, styles, and files.
 
-Use MCP rendering/image capabilities only as documented. Report the exact pages, sizes, themes, and states viewed. Canvas images cannot prove shared-reference binding; tree reads cannot prove hover, focus, navigation, or mobile behavior.
+Use documented MCP rendering and image capabilities. Report the pages, sizes, themes, and states viewed. Canvas images do not prove reference bindings; tree reads do not prove hover, focus, navigation, or mobile behavior.
 
-For requested fixes, use documented MCP mutations and preserve links, bindings, interactions, and property controls. Re-read affected references and render focused checks where possible. Saved edits are not publication; publish only with explicit user authorization.
+For requested fixes, use documented mutations and preserve links, bindings, interactions, and property controls. Re-read affected references and render focused checks when possible. Saved edits are unpublished until a publish action. Publish only with explicit authorization.

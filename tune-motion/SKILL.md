@@ -5,23 +5,25 @@ description: Preview and tune a described component's animation directly in chat
 
 # Tune motion
 
-Turn a component description into one focused, interactive motion preview. Let the user tune it locally, then carry the chosen settings into a later implementation request.
+Build one interactive preview of the described component. Let the user adjust its motion, then use the chosen settings when they ask for implementation.
+
+## Set the scope
+
+Use the description, supplied source, and conversation to identify the component, its resting and active states, and what changes between them. Ask only when a missing detail would affect the interaction. Otherwise choose a reasonable starting motion and build it.
+
+Show the requested component with enough context to understand it. An expanding accent picker should show the palette opening and closing; a toast should enter and exit. Use supplied geometry and states without copying application dependencies into the preview. Use the stock sliding panel only when it fits the request.
 
 ## Use Visualize
 
-This skill depends on the installed `visualize:visualize` skill. Resolve it from the current skill catalog and read its complete `SKILL.md` before producing or updating a preview. Follow its current output contract and applicable mockup guidance; do not hardcode a plugin version. If unavailable, explain that inline previewing needs Visualize rather than claiming a rendered result.
+Find the installed `visualize:visualize` skill in the current catalog and read its full `SKILL.md` before creating or revising a preview. Follow its current output contract and relevant mockup guidance. Do not hardcode a plugin version.
 
-## Establish the component
+If Visualize is unavailable, explain that inline previews need it. Only claim a rendered result when one exists.
 
-Use the user's description, supplied component, and conversation to identify the element, its resting/active states and what changes between them. Ask only when a missing detail materially affects the interaction. Otherwise choose a reasonable starting motion and build it.
+## Build the preview
 
-Show the actual described component, with only enough context to understand its interaction. Do not substitute the stock sliding panel when a component has been described. For example, an expanding accent picker should show a palette expanding and collapsing; a toast should visibly enter and exit. If source is supplied, adapt its meaningful geometry and states without copying application dependencies into the preview.
+Follow [DESIGN.md](DESIGN.md) for the Linear-inspired editor. Preserve the component's own design and colors.
 
-## Build from the editor
-
-Follow [DESIGN.md](DESIGN.md) for the Linear-inspired editor shell. Keep the preview component faithful to its own design; the editor theme must not recolor or redesign it.
-
-Reuse [assets/editor.html](assets/editor.html) through [scripts/create_preview.py](scripts/create_preview.py). The asset contains the shared motion engine and minimal controls; author only the component markup and its pose renderer. Read [references/component-adapter.md](references/component-adapter.md) for that small interface and an example. Resolve paths relative to this skill directory.
+Use [scripts/create_preview.py](scripts/create_preview.py) to reuse [assets/editor.html](assets/editor.html), which contains the motion engine and controls. Write the component markup and pose renderer using [references/component-adapter.md](references/component-adapter.md). Resolve paths from this skill's directory.
 
 ```bash
 python3 <skill-dir>/scripts/create_preview.py \
@@ -32,23 +34,34 @@ python3 <skill-dir>/scripts/create_preview.py \
   --output <writable-visualization-dir>/accent-picker-motion.html
 ```
 
-Choose a durable writable visualization location using Visualize's current instructions. The helper writes a fragment, not a standalone website. It refuses to overwrite an existing output unless `--force` is supplied. For revisions, keep the output path and component key stable, and retain the chosen settings where available.
+Choose a durable, writable location using Visualize's current instructions. The helper writes a fragment and requires `--force` to replace an existing output. For revisions, keep the output path and component key stable and retain chosen settings when available.
 
-Keep the editor minimal: component name, easing, duration, one component preview, Play/Pause/Resume, Loop, Slow and the curve, followed by a live instruction with Copy. Custom numerical values appear only when customizing. Do not add explanatory paragraphs, duplicate state readouts, simultaneous reference previews, transition/direction menus, decorative metrics or new settings panels unless the user needs them.
+Keep the controls limited to the component name, easing, duration, one preview, Play/Pause/Resume, Loop, Slow, the curve, and a live instruction with Copy. Show custom numbers only while customizing. Add explanatory paragraphs, duplicate state displays, simultaneous reference previews, direction menus, metrics, or extra panels only when the user needs them.
 
-## Preserve the motion contract
+## Keep the motion consistent
 
-- The renderer receives the same sampled progress as the curve. Use it to set the component's visible pose directly. No independent CSS animation, CSS transition, library spring or second animation clock: those would bypass the controls.
-- Let transforms and dimensions show spring overshoot where appropriate; clamp bounded values such as opacity. Record the property mapping in `preview.properties` so the saved settings describe what will be implemented.
-- Play runs the full resting → active → resting cycle, starting from rest when replayed. Loop repeats that cycle. Preview component triggers can call `preview.replay()`.
-- Slider and curve edits affect a running loop immediately without resetting its phase or stopping it on release. Preserve an explicit Pause. Keep local state and the instruction synchronized; never send a chat message automatically.
-- Preserve the included reduced-motion handling, native numeric input alternatives, responsive curve and state persistence. Allow enough room to see overshoot and the component's full expanded state.
-- Use the provided practical presets. Published Figma spring parameters are included, but do not claim complete Figma playback parity. Exact matching is separate work only when requested and verifiable.
+- Drive the visible pose with the same sampled progress as the curve. Independent CSS animations, transitions, library springs, and timers bypass the controls and must not drive it.
+- Allow spring overshoot in transforms and dimensions where appropriate. Clamp bounded values such as opacity. Record mappings in `preview.properties` so exported settings describe the implementation.
+- Play runs from rest to active and back to rest; replay starts from rest. Loop repeats that cycle. Component triggers can call `preview.replay()`.
+- Apply slider and curve edits immediately during a loop. Keep its phase and preserve an explicit Pause. Releasing a control must not stop playback. Keep local state and the instruction synchronized; never send a chat message automatically.
+- Preserve reduced-motion handling, native numeric alternatives, a responsive curve, and state persistence. Leave room for overshoot and the full expanded component.
+- Use the supplied presets. Published Figma spring parameters are included, but they do not establish full Figma playback parity. Exact matching needs a separate request and verification.
 
-## Check and hand off
+## Check and present
 
-Verify the component at both endpoints, at an intermediate pose and with a bouncy style. Check that changing duration, changing spring values and dragging the curve changes the component itself during a loop. Check full return playback and a narrow conversation width. Keep verification proportional; report any unavailable checks without claiming they passed.
+Check both endpoints, an intermediate pose, and a bouncy style. While a loop runs, verify that duration, spring values, and curve dragging change the component itself. Check the complete return cycle and a narrow chat width. Report any checks you could not complete.
 
-Return the inline preview through Visualize's required content reference. Keep accompanying prose brief. Show a read-only instruction that updates immediately with valid slider, curve, preset and restored-state changes. Display spring values with at most one decimal place in controls and the summary, retaining full internal and exported precision. Keep the summary compact and the complete, read-only specification inspectable under Full specification. Copy includes that full specification without pausing playback. The handoff must contain full-precision current parameters, property mappings, geometry/styles and actual renderer/sampler reference code, opening/closing equations, endpoint/clamping rules, units, interruption and reduced-motion behavior. Distinguish demonstration Loop/Slow/holds/framing from product requirements. Do not substitute preset labels or rounded display values for the selected numeric settings. Verify exported sampler and component poses against the preview, including overshoot and closing. Do not add Draft or Refresh controls. Do not imply that the widget can populate the host chat composer if no such capability exists.
+Return the inline preview using Visualize's required content reference, with brief accompanying prose.
 
-Read available widget state or a copied instruction when the user asks to apply their choice. If the chosen values are unavailable, ask for the instruction rather than guessing from a screenshot. Implement in the product only when requested, following that project's tools and authorization requirements. Creating a preview alone does not edit or publish the product.
+The read-only instruction must update immediately after valid slider, curve, preset, and restored-state changes. Show spring values to at most one decimal place in controls and the summary; retain full precision internally and in exports. Keep the summary short and the full read-only specification inspectable under Full specification. Copy must include the full specification without pausing playback.
+
+The specification must contain:
+
+- Current parameters at full precision, property mappings, and geometry/styles.
+- Actual renderer and sampler reference code.
+- Opening and closing equations, endpoint and clamping rules, and units.
+- Interruption and reduced-motion behavior.
+
+Separate demonstration controls such as Loop, Slow, holds, and framing from product requirements. Use selected numeric values, not just preset labels or rounded displays. Verify the exported sampler and poses against the preview, including overshoot and closing. Do not add Draft or Refresh controls, or claim the widget can fill the host chat composer without that capability.
+
+When the user asks to apply the motion, read available widget state or their copied instruction. If chosen values are unavailable, ask for the instruction; a screenshot is not enough to recover them. Follow the product's tools and authorization requirements. A preview alone does not authorize product changes or publication.

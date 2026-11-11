@@ -1,18 +1,19 @@
 # Board primitives
 
-A board is one `<template>` per screen. Inside it you draw the screen once with the `wf-` classes below. The viewer renders that same markup at three wireframe levels, so you never draw a screen twice.
+Use one `<template>` per screen and draw it with `wf-` classes. The viewer renders the same board at all three wireframe levels.
 
 ## Contents
+
 1. The template element
-2. Zones and notes (the attributes that matter most)
+2. Zones and notes
 3. Layout
 4. System chrome
 5. Text
 6. Controls and content
 7. Overlays and glyphs
 8. How each level treats each primitive
-9. Patterns (copy these)
-10. Rules that keep the levels clean
+9. Patterns
+10. Drawing rules
 
 ## 1. The template element
 
@@ -36,7 +37,7 @@ A board is one `<template>` per screen. Inside it you draw the screen once with 
 | `data-radius` | no | Corner radius of the frame. Defaults to 44 for phones, 24 for tablets, 10 for desktop. |
 | `data-present` | no | Present-mode order for this screen, such as `mid,design`. Defaults to `struct,low,mid,design`. |
 
-At the top of the boards file, two optional meta tags set the page title and the line under it:
+Optional meta tags at the top of the boards file set the title, summary, starting level, and presentation order:
 
 ```html
 <meta name="title" content="Clock a Timesheet">
@@ -49,7 +50,7 @@ The board is a flex column, `position: relative`, with `overflow: hidden`. Child
 
 ## 2. Zones and notes
 
-**Zones** are what the Structure level shows. Put these on each top-level region of the screen:
+Structure shows zones. Add these attributes to each top-level region:
 
 | Attribute | Meaning |
 |---|---|
@@ -63,11 +64,11 @@ A zone needs room for its label: about 44pt tall and most of the screen's width.
 
 The Structure level tidies zones by itself, so draw them where the regions really are and do not nudge them by hand: a zone within 28pt of a side edge lines up on the shared side margin (16pt, or 24pt on boards 700pt and wider), edges snap to a 4pt grid, every zone is at least 32pt each way, and neighbouring zones keep an 8pt gap. Order and rough position stay, so the blocks still line up with the other levels. A zone on a plain wrapper (no fill, border or shadow of its own, such as a `wf-pad` section) ignores the wrapper's top and bottom padding, so spacing a section with `padding-top` does not stretch its block; a zone on a card or list keeps the card's full edge. Labels sit top left; the purpose line is clamped to the room the block has and is always in the block's hover title.
 
-**Notes** are numbered pins. Add `data-note="..."` to the element the note is about. Keep to two to six per screen, each one sentence, about intent, decisions or open questions. Do not write notes about visuals.
+Notes appear as numbered pins. Add `data-note="..."` to the relevant element. Use two to six one-sentence notes per screen, covering intent, decisions, or open questions. Keep visual details out of notes.
 
 The pin sits just outside the element's top-right corner, so put notes on boxes (a row, card, button, chip group or zone) rather than on a bare line of text, where the pin would cover the end of the line. Pins that would land on top of each other are moved down automatically.
 
-**`data-keep`** on an element keeps its real text at Low-fi (normally body text becomes grey lines). Use it for the few words a stakeholder must read at Low-fi, such as a status that changes the meaning of the screen.
+Add `data-keep` to retain real text at Low-fi, where body text normally becomes grey lines. Use it for essential words, such as a status that changes the screen's meaning.
 
 ## 3. Layout
 
@@ -152,7 +153,7 @@ For anything else that floats (a floating timer bar, a toast, a card that is not
 
 ### Glyphs
 
-Icons are blank placeholders by default, which is right for decoration. When the icon *is* the control and its symbol carries meaning (play, stop, close), add `data-glyph` to the `wf-icon`, `wf-fab` or `wf-avatar`:
+Icons default to blank placeholders. For controls whose symbol carries meaning, such as play, stop, or close, add `data-glyph` to the `wf-icon`, `wf-fab` or `wf-avatar`:
 
 `play` `pause` `stop` `close` `down` `back` `plus` `check` `more` `search` `chat` `edit`
 
@@ -176,11 +177,11 @@ Glyphs show at Mid-fi and Low-fi. Use them sparingly; most icons should stay bla
 | Zones | invisible | invisible | tidied labeled blocks, shaded by priority |
 | Notes | pins | pins | pins |
 
-Because geometry never changes between levels, toggling looks like detail being peeled away rather than a different drawing.
+Shared geometry keeps the screens aligned when switching levels.
 
 ## 9. Patterns
 
-**Large-title screen with a list and tab bar**
+### Large-title screen with a list and tab bar
 
 ```html
 <div class="wf-statusbar"></div>
@@ -207,7 +208,7 @@ Because geometry never changes between levels, toggling looks like detail being 
 <div class="wf-home"></div>
 ```
 
-**Inset grouped list (iOS settings style)**
+### Inset grouped list (iOS settings style)
 
 ```html
 <div class="wf-pad wf-stack" style="--gap:8px">
@@ -219,7 +220,7 @@ Because geometry never changes between levels, toggling looks like detail being 
 </div>
 ```
 
-**Modal sheet over a dimmed screen**
+### Modal sheet over a dimmed screen
 
 ```html
 <div class="wf-statusbar"></div>
@@ -231,7 +232,7 @@ Because geometry never changes between levels, toggling looks like detail being 
 </div>
 ```
 
-**Chat**
+### Chat
 
 ```html
 <section class="wf-fill wf-stack wf-pad" style="--gap:8px;justify-content:flex-end" data-zone="Conversation" data-purpose="Messages with the client" data-priority="1">
@@ -243,9 +244,9 @@ Because geometry never changes between levels, toggling looks like detail being 
 </div>
 ```
 
-**Floating button with its own zone**
+### Floating button with its own zone
 
-A floating button is too small to hold a zone label. Put the zone on a full-width, absolutely placed row at the button's height, and the button inside it:
+Place a floating button inside a full-width, absolutely positioned row at the button's height. Put the zone on that row to leave room for its label:
 
 ```html
 <div style="position:absolute;left:0;right:0;bottom:91px;height:61px"
@@ -254,11 +255,11 @@ A floating button is too small to hold a zone label. Put the zone on a full-widt
 </div>
 ```
 
-**Carousel that runs off the edge of a card or sheet**
+### Carousel that runs off the edge of a card or sheet
 
 Give the carousel a negative side margin equal to the container's padding, and the same padding inside, so chips scroll under the edge as in the design: `style="margin:0 -16px;padding:0 16px"`.
 
-**Desktop page with a sidebar**
+### Desktop page with a sidebar
 
 ```html
 <template data-name="Dashboard" data-device="desktop" data-design="shots/dashboard.png" data-summary="...">
@@ -276,9 +277,9 @@ Give the carousel a negative side margin equal to the container's padding, and t
 </template>
 ```
 
-## 10. Rules that keep the levels clean
+## 10. Drawing rules
 
 - Inline styles only for size, spacing and position. Never set color, background, font family, weight, shadow or opacity: the levels own those, and a hard-coded color leaks into every level.
 - Use the primitives instead of inventing classes. The build warns about any unknown `wf-` class because it would render unstyled.
 - Simplify while you draw. One primitive per thing that matters; drop decoration (background art, gradients, purely decorative icons and dividers).
-- Keep real copy. Mid-fi is only useful if the words are the real words. Replace every person's name, email, phone number and address with a plain sample value ("Alex Morgan", "Jordan Ellis"). That includes QA and test-account names such as "Qa Tester 12": they are not private, but they distract stakeholders. Keep names of places, services and products.
+- Use the design's words at Mid-fi. Replace every person's name, email, phone number, and address with sample values such as "Alex Morgan" or "Jordan Ellis". Replace distracting QA names such as "Qa Tester 12" too. Keep place, service, and product names.

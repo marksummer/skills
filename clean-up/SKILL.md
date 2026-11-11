@@ -3,38 +3,45 @@ name: clean-up
 description: Remove unnecessary UI, simplify copy, and improve the layout of an existing screen or flow. Use for requests such as "clean up this screen", "remove the extra labels", or "make this interface less wordy". Not for filesystem cleanup or general code refactoring.
 ---
 
-# Clean Up
+# Clean up
 
-Reduce what people have to read and process while keeping the interface understandable and useful. Every element should help someone understand, decide, act, or recover. An already clear screen may need no changes.
+Simplify an existing interface while keeping it useful and understandable. Each element should help someone understand, decide, act, or recover. A clear screen may need no changes.
 
-## Establish the scope
+## Set the scope
 
-Inspect the requested interface and its source, primary task, visual language, and relevant normal, loading, empty, error, and disabled states. Preserve a before capture or original source for comparison.
+Inspect the interface, its source, main task, and visual language. Review relevant normal, loading, empty, error, and disabled states. Keep a before capture or the original source for comparison.
 
-Apply changes when requested or implied; give recommendations for an audit. Local layout refinement is in scope: regroup content, integrate secondary actions, and fix hierarchy, spacing, and alignment. Honor explicit copy-only or fixed-layout constraints. Preserve behavior, accessibility, factual meaning, design tokens, and publishing permissions; do not add features or replace the visual identity.
+Make changes when the request asks for or implies them. For an audit, give recommendations. Local layout work can regroup content, integrate secondary actions, and improve hierarchy, spacing, or alignment. Follow copy-only and fixed-layout limits.
+
+Preserve behavior, accessibility, factual meaning, design tokens, and publishing permissions. Keep new features and a new visual identity outside the cleanup.
 
 ## Use Impeccable when available
 
-Check the skill catalog or applicable project/user skill locations for Impeccable, including plugin-qualified names. Load its actual installed `SKILL.md`; resolve references from that directory.
+Look for Impeccable in the skill catalog or relevant user and project skill locations, including plugin-qualified names. Read the installed `SKILL.md` and resolve its references from that directory.
 
-Follow **distill**, plus **layout** when arrangement contributes to clutter. Follow the installed skill's setup, platform, craft, and bounded verification instructions. Keep downstream handoffs within the user's scope; copy-only work still excludes layout changes. Apply its workflow, not a fictional skill-call API.
+Use its distill guidance and, when arrangement adds clutter, its layout guidance. Follow its setup, platform, craft, and bounded verification instructions. Keep any handoff within the user's scope; copy-only work still excludes layout changes. Follow the documented workflow without inventing a skill-call API.
 
-Impeccable is optional. If it is unavailable or cannot be loaded, continue with the principles below without installing it or blocking the task. Briefly identify which path was used in the completion review.
+If Impeccable is unavailable or cannot be loaded, continue with the guidance below. Do not install it or block the task. Briefly state whether you used it in the completion review.
 
-## Clean up
+## Clean up the interface
 
-- Remove duplicate labels, headings, instructions for familiar controls, filler, routine badges, and decoration without a useful role. Investigate unclear elements; keep credible functional or safety dependencies, not unexplained display clutter by default. Note meaningful assumptions.
-- Preserve necessary facts, not every element carrying them. Consolidate related status, timestamps, and recovery actions. Identity, connectivity, local safety, and availability elsewhere may be different facts. Keep useful feedback in the states that need it.
-- Shorten copy without losing meaning, specificity, or the product's voice. Keep constraints, unfamiliar concepts, and destructive consequences clear. Do not optimize for the fewest words.
-- Group related information and attach secondary actions to what they affect. Establish one clear primary action. Reduce unnecessary containers, borders, accents, and equal emphasis; a shorter awkward stack still needs layout work.
-- Remove duplicate visible labeling only when context and the control remain unmistakable. Preserve accessible names and useful field labels; placeholders alone are not accessible names. Put secondary information where it becomes relevant without hiding a current requirement.
+- Remove duplicate labels, headings, familiar-control instructions, filler, routine badges, and decoration without a useful role. Investigate unclear elements and preserve functional or safety dependencies. State meaningful assumptions.
+- Consolidate related status, timestamps, and recovery actions while preserving distinct facts. Identity, connectivity, local safety, and availability elsewhere may each need separate feedback. Show that feedback in the states that need it.
+- Shorten copy while keeping its meaning, specificity, and voice. Explain constraints, unfamiliar concepts, and destructive consequences. Use enough words to stay clear.
+- Group related information and attach secondary actions to what they affect. Establish one clear primary action. Reduce unnecessary containers, borders, accents, and competing emphasis. Review the layout after shortening it.
+- Remove duplicate visible labels only when context and controls remain clear. Keep accessible names and useful field labels; a placeholder alone is not an accessible name. Move secondary information to where it is relevant without hiding a current requirement.
 
-Review the remaining screen as a whole for duplication, fragmented messages, and excessive emphasis. Do not use a removal quota or manufacture changes.
+Review the whole screen for repetition, fragmented messages, and excessive emphasis. Make changes where they help; do not use a removal quota.
 
-## Verify and show the result
+## Check and present
 
-Check the main task, state feedback, recovery, focus order, and affected interactions when runnable. Preserve control/action identities and input validation, values, and choices; compare those contracts when only source is available. Inspect supported appearances and narrow layouts when renderable. A screenshot does not prove behavior.
+When runnable, check the main task, state feedback, recovery, focus order, and affected interactions. Preserve control and action identities, input validation, values, and choices. If only source is available, compare those contracts there. Inspect supported appearances and narrow layouts when renderable. Screenshots alone do not verify behavior.
 
-Finish in chat with a brief summary of meaningful removals, changes, important information kept, and actual verification or limitations. Show the smallest useful **Before/After** comparison directly: matched captures of state, content, viewport, and appearance for visible changes, or exact text snippets/a compact table for copy-only work. Keep images readable on a phone and stack them when needed.
+Finish with a brief summary of meaningful removals and changes, important information retained, and what was checked or remains unverified. Show the smallest useful before-and-after comparison:
 
-If captures are unavailable, give a concrete source/text comparison and state the limit. Label illustrative mockups and specifications accurately. If no cleanup is needed, explain briefly. Keep this review out of the product UI; do not add a dashboard or removal score.
+- For visible changes, match state, content, viewport, and appearance in the captures.
+- For copy-only work, use exact text snippets or a compact table.
+
+Keep images readable on a phone; stack them when needed. If captures are unavailable, compare source or text and explain the limit. Label illustrative mockups and specifications. If no cleanup is needed, say why briefly.
+
+Keep this review in chat. Do not add a dashboard or removal score to the product.

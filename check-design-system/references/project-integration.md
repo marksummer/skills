@@ -1,10 +1,10 @@
-# Ready-to-paste project integration
+# Project setup
 
-Use these snippets when the user asks how to adopt the audit in a project. Keep the reusable audit workflow in the installed skill, the project's design rules in `DESIGN.md`, and routing guidance in the agent's recognized instruction file. Provide the snippets without modifying project files unless the user requests those edits.
+Use these snippets when the user asks to adopt the audit. Keep the workflow in the installed skill, project design rules in `DESIGN.md`, and routing in the agent's instruction file. Provide the snippets; edit project files only when requested.
 
-## Add to DESIGN.md
+## DESIGN.md
 
-Place this section alongside the project's existing design rules. Preserve its token/component links and scoped exceptions.
+Add this beside the existing design rules. Preserve token and component links and scoped exceptions.
 
 ```markdown
 ## Design-system verification
@@ -27,9 +27,9 @@ If this document and the implementation disagree, report the
 conflict rather than silently changing either one.
 ```
 
-## Add to AGENTS.md for Codex
+## AGENTS.md for Codex
 
-Use a path relative to the instruction file; adjust it for a monorepo or a nested design document. Preserve existing instructions and project restrictions.
+Use paths relative to the instruction file, adjusting for monorepos and nested design documents. Preserve existing instructions and restrictions.
 
 ```markdown
 Before UI work, read DESIGN.md when it exists.
@@ -39,14 +39,16 @@ If the skill is unavailable, report that limitation; do not claim
 to have run it. Do not implement audit findings unless requested.
 ```
 
-For another agent, put equivalent routing in its documented instruction mechanism; do not promise that every tool automatically reads `DESIGN.md` or recognizes Codex's invocation syntax.
+For other agents, use their documented instruction mechanism. Do not assume every tool reads `DESIGN.md` or understands Codex invocation syntax.
 
-## Availability and scope
+## Installation and scope
 
-Install the skill before relying on its name. A reference in `DESIGN.md` does not install/register the skill. For a Codex team repository, a project-owned skill may live at `.agents/skills/check-design-system/SKILL.md`, with its sibling `references/` and `agents/` files retained. A personal installation can serve multiple projects. Use the host's current skill installation/discovery guidance when giving setup instructions.
+Install the skill before relying on its name. A mention in `DESIGN.md` does not install or register it.
 
-Keep everyday checks scoped to affected UI and relevant shared definitions; request a full-project audit explicitly when needed. The skill's full-project audit default still applies to a standalone request to audit the project. An instruction to audit before finishing does not authorize fixes discovered by that audit.
+In a Codex team repository, the skill can live at `.agents/skills/check-design-system/SKILL.md`, with its sibling `references/` and `agents/` files. A personal installation can serve several projects. Follow the host's current installation and discovery guidance.
 
-For Framer projects, use the project's documented MCP guidance mechanism and permitted documentation access. Do not create an unsupported `DESIGN.md` code file or a local mirror to simulate integration. If project guidance cannot expose the snippet, provide it for the user to add through an appropriate supported mechanism.
+Keep routine checks scoped to affected UI and relevant shared definitions. Request a full-project audit when needed. A standalone project-audit request still uses the skill's full-project default. An instruction to audit before finishing does not authorize the fixes it finds.
 
-If the user asks for a self-contained workflow inside `DESIGN.md`, adapt the skill's procedure explicitly rather than claiming the short reference contains the full workflow. Keep the canonical skill and any embedded copy synchronized when both are maintained.
+For Framer, use the project's documented MCP guidance mechanism and permitted documentation access. Do not create an unsupported `DESIGN.md` code file or local mirror. If project guidance cannot expose the snippet, provide it for the user to add through a supported route.
+
+If the user wants the complete workflow inside `DESIGN.md`, adapt the procedure into it. A short skill reference does not contain that workflow. Keep the installed skill and any maintained embedded copy synchronized.

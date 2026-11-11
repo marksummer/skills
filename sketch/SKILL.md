@@ -5,59 +5,51 @@ description: "Quick, interactive interface sketches. Focus on one element by def
 
 # Sketch
 
-Turn the user's idea into the smallest sketch that helps them make a design decision. Default to focused mode; use fuller mode when the user asks for a screen or flow.
+Build the smallest interactive sketch that helps the user make a design decision. Start with one element. Include a full screen or flow when requested.
+
+## Set the scope
+
+Use the request and conversation to identify the user, platform, and design question. Use the product context and references already available. Ask one focused question if a missing detail would change the structure; otherwise proceed and state any consequential assumptions.
+
+Keep the chosen scope through revisions:
+
+- For one element, show one direction with enough context to judge it. Keep relevant labels, sample content, platform conventions, and selection or feedback states.
+- For a comparison, show the requested alternatives at the same scope.
+- For a screen or flow, include the navigation, adjacent actions, and states needed to try the main task. An explicit request is enough; the user does not need to name a mode.
+
+Leave out unrelated app chrome, settings, preview panels, and dismissal or reopening flows. Add them when they affect the decision. Omitting them from a sketch does not mean removing them from the product. An accent-picker layout usually needs color choices and selection feedback; an app preview helps when the question is how the accent looks in context.
+
+A sketch request alone does not authorize product implementation or publication. Follow any requested deliverable format.
 
 ## Use Visualize
 
-This skill depends on the installed `visualize:visualize` skill from the Visualize plugin. Find it in the current skill catalog and read its complete `SKILL.md` before creating or changing a sketch. Follow its current output contract and UI mockup guidance; read its referenced mockup and variant guidance when applicable. Resolve its location from the catalog rather than hardcoding a plugin version or copying its runtime instructions here.
+Find the installed `visualize:visualize` skill in the current catalog and read its full `SKILL.md` before creating or revising a sketch. Follow its current output contract, UI mockup guidance, and relevant mockup or variant references. Resolve its location from the catalog; do not hardcode a plugin version or duplicate its runtime instructions.
 
-If Visualize is unavailable, explain the missing dependency and provide a concise layout outline; do not claim to have rendered an interactive sketch.
-
-## Choose the scope
-
-### Focused mode — default
-
-- Identify the one element and design question being refined. Render one direction with only the surrounding context needed to judge it.
-- Keep relevant labels, sample content, platform conventions, and selection or feedback states. Add interaction only when it helps answer the question.
-- Omit unrelated app chrome, navigation, preview panels, settings pages, dismissal/reopening flows, and extra states unless they affect that decision. Reduce the scope of the sketch, without implying those features should be removed from the product.
-- Do not automatically generate alternatives or a complete journey. A comparison request authorizes the requested alternatives at the same focused scope.
-- For example, exploring an accent picker's choice layout needs the color options and selected-state feedback. Include an app preview only when evaluating how the accent looks in context.
-
-### Fuller mode — when requested
-
-- Use this mode for requests such as "show the full screen," "include the surrounding settings," or "sketch the onboarding flow." An explicit screen or flow request is enough; no mode keyword is required.
-- Show the requested screen or journey, with the navigation, adjacent actions, and states needed to try its main task. Keep unrelated screens out of scope.
-
-Carry the chosen scope through revisions. Expand it when the user asks for more context or a fuller screen or flow.
-
-## Establish the brief
-
-- Use the request and conversation to identify the intended user, platform, and design question.
-- Ask one focused question only if missing information would materially change the structure. Otherwise make reasonable assumptions and briefly state consequential assumptions in the response.
-- Use product context and supplied references already available. Follow Visualize's guidance on using existing context instead of searching the project just to produce a mockup.
-- A sketch request alone does not authorize implementation in the product or publication. Follow an explicit request for another deliverable format when given.
+If Visualize is unavailable, explain the dependency and provide a short layout outline. Only claim an interactive result when one was rendered.
 
 ## Build the sketch
 
-- Keep fidelity low: a restrained neutral palette, simple boundaries, readable labels, and clear spacing. Preserve platform conventions that affect navigation or behavior. Skip decorative illustrations, gradients, and branding work unless requested.
-- Use plausible sample content and real action labels. Reserve placeholders for images and genuinely unknown content; avoid filling every region with lorem ipsum or blank boxes.
-- Make included controls locally interactive when relevant: selection changes the visible state and forms provide plausible feedback. In fuller mode, navigation should connect the requested screens with a clear way back. Keep simulated actions local and do not imply real data was saved or sent.
-- Include empty, loading, error, or confirmation states only when they affect the design question. Do not build a state catalogue by default.
-- Follow the chosen scope for alternatives. When comparing, use meaningfully different structures with the same task and sample content, following Visualize's variant carousel guidance.
-- Use Visualize's product-specific mockup styling rules inside the depicted interface. Keep any presentation controls outside the product UI and limited to useful layout decisions.
-- Support the requested platform and narrow conversation widths. Keep labels readable, controls keyboard accessible, and essential actions usable without hover.
+Use Visualize's guidance for existing context; avoid searching the project solely to make a mockup.
+
+- Keep fidelity low with neutral colors, simple boundaries, readable labels, and clear spacing. Preserve platform conventions that affect navigation or behavior. Add branding, illustrations, or gradients only when requested.
+- Use plausible sample content and real action labels. Use placeholders for images and unknown content.
+- Make controls work locally when they help answer the question. Selection should change the visible state; forms should give plausible feedback. For flows, connect the requested screens and provide a way back. Keep simulated actions local and make their limits clear.
+- Include empty, loading, error, or confirmation states when they affect the decision.
+- Make alternatives differ in structure while keeping the task and sample content consistent. Follow Visualize's variant carousel guidance.
+- Apply Visualize's product-specific styling inside the depicted interface. Keep presentation controls outside it and limited to useful layout choices.
+- Support the requested platform and narrow chat widths. Keep labels readable, controls keyboard accessible, and essential actions available without hover.
 
 ## Check and present
 
-Read back the generated fragment and check its primary interaction and narrow layout using Visualize's checks and preview workflow where available. Check navigation only when included. Keep verification proportional to the sketch; fix broken controls, clipped content, and unreadable states, and report checks that could not be completed.
+Read back the generated fragment. Use Visualize's checks and preview workflow, when available, to inspect the main interaction and narrow layout. Check navigation when included. Fix broken controls, clipping, and unreadable states. Report checks you could not complete.
 
-Return the inline visualization through Visualize's required final-response content reference. Add at most a short explanation of the key layout decision or a consequential assumption. Keep implementation details out of the sketch and surrounding explanation.
+Return the inline visualization using Visualize's required final-response content reference. Add only a short explanation of a layout decision or consequential assumption. Keep implementation details out of the sketch and its explanation.
 
-For revisions, preserve the agreed structure and fidelity unless the user changes direction. Update the existing sketch where practical and include the updated visualization reference in that turn's final response. Carry forward explicit layout choices; move to polished design or product implementation when the user requests it.
+For revisions, preserve agreed choices and fidelity unless the user changes direction. Update the existing sketch when practical and return its updated visualization reference. Move to polished design or product implementation when requested.
 
 ## Example requests
 
-- Focused: "Show an alternative accent picker."
-- Focused comparison: "Compare two ways to show the selected color."
-- Fuller screen: "Show the complete iPhone reminder creation screen."
-- Fuller flow: "Sketch onboarding with working next and back buttons."
+- "Show an alternative accent picker."
+- "Compare two ways to show the selected color."
+- "Show the complete iPhone reminder creation screen."
+- "Sketch onboarding with working next and back buttons."

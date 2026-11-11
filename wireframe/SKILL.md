@@ -3,7 +3,7 @@ name: wireframe
 description: Turn a polished UI design into stakeholder-ready wireframes at three levels of detail (mid-fi, low-fi and structure) and package them with the original design in one self-contained HTML page that flips between the polished screen and each wireframe level, one screen at a time or all screens at once, with numbered notes. Works from screenshots, Figma frames, web pages, HTML prototypes, Claude artifacts or a running app. Use this whenever someone wants to wireframe an existing design, "strip the UI" or "de-polish" screens before a review, show stakeholders a flow or structure without colors and fonts getting in the way, make lo-fi or mid-fi versions of screens, or present a design so feedback stays on content and flow, even if they never say the word "wireframe".
 ---
 
-# Wireframes
+# Wireframe
 
 Turn an existing design into a review page with the original screenshot and three wireframe levels. Choose the detail that fits the audience and the question.
 

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Wireframe"
+  short_description: "Turn existing designs into wireframes for review"
+  default_prompt: "Use $wireframe to turn these screens into wireframes for review."

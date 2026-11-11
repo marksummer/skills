@@ -1,17 +1,17 @@
-# Check design system
+# Audit
 
 Find where an interface has drifted from the project's shared tokens, components, and design rules. Works with iOS apps, other codebases, and Framer projects.
 
 ## Install
 
-Follow the [installation steps](../README.md#install) and choose Check Design System.
+Follow the [installation steps](../README.md#install) and choose Audit.
 
 Framer audits require a connected Framer MCP. Visual comparisons use the capture and rendering tools available in your environment; the audit reports any limits.
 
 ## Use
 
 ```text
-Use $check-design-system to audit this project. Keep it read-only.
+Use $audit to audit this project. Keep it read-only.
 ```
 
 Point it at the project or name the screens and files you want checked. It reads `DESIGN.md` when available and checks the rules against the definitions the project actually uses.

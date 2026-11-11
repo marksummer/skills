@@ -11,10 +11,10 @@ Five skills I use to work through interface ideas, simplify screens, and check t
 | Skill | Use it to |
 | --- | --- |
 | [Sketch](sketch/README.md) | Explore an interface idea with an interactive sketch. |
-| [Clean up](clean-up/README.md) | Remove clutter, tighten copy, and improve an existing layout. |
-| [Tune motion](tune-motion/README.md) | Try an animation and adjust it in chat. |
-| [Check design system](check-design-system/README.md) | Find where UI has drifted from the project's design system. |
-| [Wireframes](wireframes/README.md) | Turn an existing design into wireframes for review. |
+| [Clean Up](clean-up/README.md) | Remove clutter, tighten copy, and improve an existing layout. |
+| [Tune Motion](tune-motion/README.md) | Try an animation and adjust it in chat. |
+| [Audit](audit/README.md) | Find where UI has drifted from the project's design system. |
+| [Wireframe](wireframe/README.md) | Turn an existing design into wireframes for review. |
 
 ## Install
 
@@ -27,10 +27,10 @@ Run this in your project, then choose Codex and the skills you want. Requires No
 | Skill | What else you need |
 | --- | --- |
 | Sketch | The Visualize plugin in Codex for interactive previews. Without it, you get a layout outline. |
-| Clean up | No extra dependency. Uses Impeccable when it is already installed. |
-| Tune motion | The Visualize plugin in Codex and Python 3 for the preview generator. |
-| Check design system | Available capture and rendering tools for visual comparisons. Framer audits need a connected Framer MCP. |
-| Wireframes | Python 3.9 or later. Snapshot checks also need Chrome, Chromium, Edge, or Brave. |
+| Clean Up | No extra dependency. Uses Impeccable when it is already installed. |
+| Tune Motion | The Visualize plugin in Codex and Python 3 for the preview generator. |
+| Audit | Available capture and rendering tools for visual comparisons. Framer audits need a connected Framer MCP. |
+| Wireframe | Python 3.9 or later. Snapshot checks also need Chrome, Chromium, Edge, or Brave. |
 
 Install Visualize separately. Each skill's usage page covers its requirements and limits.
 
@@ -65,7 +65,7 @@ with adding, removing, and pasting multiple lines.
 
 [Usage](sketch/README.md) · [Instructions](sketch/SKILL.md)
 
-## Tune motion example
+## Tune Motion example
 
 Try the accent picker opening and closing. Adjust the easing or spring, drag the curve, and copy the full motion specification when it feels right.
 

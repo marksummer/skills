@@ -1,9 +1,9 @@
 ---
-name: check-design-system
+name: audit
 description: Audit design-system use against DESIGN.md when present and canonical project definitions across iOS apps (SwiftUI/UIKit), other codebases, and Framer projects through Framer MCP. Use to check every UI element, find hardcoded styles or detached components, audit tokens and variants, or detect design-system drift. Report a concise summary, prioritized findings, a before-and-after visual preview, existing replacements, exceptions, coverage, and changes since a comparable prior audit; fix only when requested. Not a general redesign or a request to invent a design system.
 ---
 
-# Check design system
+# Audit
 
 Check UI against the project's established design system. Trace shared definitions and their uses before judging an element.
 

@@ -1,17 +1,17 @@
-# Wireframes
+# Wireframe
 
 Turn an existing design into wireframes for review. Switch between the original screen and three levels of detail to discuss content, flow, and structure.
 
 ## Install
 
-Follow the [installation steps](../README.md#install) and choose Wireframes.
+Follow the [installation steps](../README.md#install) and choose Wireframe.
 
 Requires Python 3.9 or later, using only the standard library. Snapshot checks (`--snap`) also need Chrome, Chromium, Edge, or Brave. Set `CHROME=/path/to/browser` if the browser is not found. To shrink large screenshots, use `sips` on macOS or Pillow.
 
 ## Use
 
 ```text
-Use $wireframes to turn these four sign-up screens into wireframes for review.
+Use $wireframe to turn these four sign-up screens into wireframes for review.
 ```
 
 Provide screenshots, Figma frames, a web page, an HTML prototype, a Claude artifact, or a running app.
@@ -36,7 +36,7 @@ Publishing as a Claude artifact adds comment pins through the Claude service. Th
 Run this from the repository root to try the build:
 
 ```bash
-python3 wireframes/scripts/build.py wireframes/assets/example-boards.html --out example.html --open
+python3 wireframe/scripts/build.py wireframe/assets/example-boards.html --out example.html --open
 ```
 
 ## Manual setup
@@ -51,20 +51,20 @@ Codex and Cursor read `~/.agents/skills`:
 
 ```bash
 mkdir -p ~/.agents/skills
-ln -s ~/code/wireframes-skill/wireframes ~/.agents/skills/wireframes
+ln -s ~/code/wireframes-skill/wireframes ~/.agents/skills/wireframe
 ```
 
 Claude Code reads `~/.claude/skills` (Cursor reads it too):
 
 ```bash
 mkdir -p ~/.claude/skills
-ln -s ~/code/wireframes-skill/wireframes ~/.claude/skills/wireframes
+ln -s ~/code/wireframes-skill/wireframes ~/.claude/skills/wireframe
 ```
 
-Claude apps (claude.ai, desktop): zip the `wireframes/` folder and upload the zip as a custom skill.
+Claude apps (claude.ai, desktop): zip the `wireframe/` folder and upload the zip as a custom skill.
 
 ```bash
-cd ~/code/wireframes-skill && zip -r wireframes.zip wireframes
+cd ~/code/wireframes-skill && zip -r wireframe.zip wireframe
 ```
 
 Pull the repository to update the linked skill.
@@ -73,7 +73,7 @@ Pull the repository to update the linked skill.
 ## Files
 
 ```
-wireframes/
+wireframe/
   SKILL.md                 workflow the agent follows
   references/primitives.md board vocabulary (wf- classes, zones, notes, patterns)
   references/capture.md    getting screenshots from each kind of source

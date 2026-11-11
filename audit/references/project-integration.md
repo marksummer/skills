@@ -10,7 +10,7 @@ Add this beside the existing design rules. Preserve token and component links an
 ## Design-system verification
 
 For UI reviews and before completing UI changes, use the
-check-design-system skill to audit the affected UI against this
+audit skill to audit the affected UI against this
 document and the project's canonical tokens and components.
 
 Report:
@@ -34,7 +34,7 @@ Use paths relative to the instruction file, adjusting for monorepos and nested d
 ```markdown
 Before UI work, read DESIGN.md when it exists.
 Follow its Design-system verification section before finishing.
-Use the installed check-design-system skill for the audit.
+Use the installed audit skill for the audit.
 If the skill is unavailable, report that limitation; do not claim
 to have run it. Do not implement audit findings unless requested.
 ```
@@ -45,7 +45,7 @@ For other agents, use their documented instruction mechanism. Do not assume ever
 
 Install the skill before relying on its name. A mention in `DESIGN.md` does not install or register it.
 
-In a Codex team repository, the skill can live at `.agents/skills/check-design-system/SKILL.md`, with its sibling `references/` and `agents/` files. A personal installation can serve several projects. Follow the host's current installation and discovery guidance.
+In a Codex team repository, the skill can live at `.agents/skills/audit/SKILL.md`, with its sibling `references/` and `agents/` files. A personal installation can serve several projects. Follow the host's current installation and discovery guidance.
 
 Keep routine checks scoped to affected UI and relevant shared definitions. Request a full-project audit when needed. A standalone project-audit request still uses the skill's full-project default. An instruction to audit before finishing does not authorize the fixes it finds.
 

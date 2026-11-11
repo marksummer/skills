@@ -1,4 +1,4 @@
-# Clean up
+# Clean Up
 
 Remove clutter, tighten copy, and improve an existing layout. Keep the behavior, accessibility, and visual identity that make the screen useful.
 

@@ -1,5 +1,5 @@
 ---
-name: wireframes
+name: wireframe
 description: Turn a polished UI design into stakeholder-ready wireframes at three levels of detail (mid-fi, low-fi and structure) and package them with the original design in one self-contained HTML page that flips between the polished screen and each wireframe level, one screen at a time or all screens at once, with numbered notes. Works from screenshots, Figma frames, web pages, HTML prototypes, Claude artifacts or a running app. Use this whenever someone wants to wireframe an existing design, "strip the UI" or "de-polish" screens before a review, show stakeholders a flow or structure without colors and fonts getting in the way, make lo-fi or mid-fi versions of screens, or present a design so feedback stays on content and flow, even if they never say the word "wireframe".
 ---
 
@@ -24,12 +24,12 @@ Paths below are relative to this skill's folder.
 
 ## Get the design
 
-Save one image per screen in flow order, using a work folder such as `wireframes/<flow-name>/shots/` inside the user's project or a temporary folder. Copy supplied files there with short names such as `01-home.png` and `02-new-timesheet.png`.
+Save one image per screen in flow order, using a work folder such as `wireframe/<flow-name>/shots/` inside the user's project or a temporary folder. Copy supplied files there with short names such as `01-home.png` and `02-new-timesheet.png`.
 
 Read `references/capture.md` for Figma, web pages, artifacts, iOS Simulator, and Android captures. Measure the images before drawing:
 
 ```bash
-python3 scripts/build.py --measure wireframes/<flow-name>/shots/*.png
+python3 scripts/build.py --measure wireframe/<flow-name>/shots/*.png
 ```
 
 If a screen image is unavailable, ask for one. The original design is needed for the comparison.
@@ -59,7 +59,7 @@ Read `references/primitives.md` and follow `assets/example-boards.html`. Create 
 Build a snapshot:
 
 ```bash
-python3 scripts/build.py wireframes/<flow-name>/boards.html --out wireframes/<flow-name>/<flow-name>.html --snap <first-screen-id>
+python3 scripts/build.py wireframe/<flow-name>/boards.html --out wireframe/<flow-name>/<flow-name>.html --snap <first-screen-id>
 ```
 
 Inspect the printed `snap/<id>.png`. It shows Design, Overlay (the design at 50% over Mid-fi), Mid-fi, Low-fi, and Structure. Correct status bar height, side padding, text sizes, and row heights before repeating them across other screens.
@@ -71,7 +71,7 @@ Use the calibrated sizes. For shared regions or states, copy the board and chang
 ## Build and verify
 
 ```bash
-python3 scripts/build.py wireframes/<flow-name>/boards.html --out wireframes/<flow-name>/<flow-name>.html --snap
+python3 scripts/build.py wireframe/<flow-name>/boards.html --out wireframe/<flow-name>/<flow-name>.html --snap
 ```
 
 The build embeds screenshots, shrinks large ones, sets board heights from their images, and checks summaries, zones, nested zones, unknown classes, and inline colors. It writes one snapshot per screen, usually in about a second each. Fix every warning and inspect each snapshot:

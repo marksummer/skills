@@ -1,4 +1,4 @@
-# Tune motion
+# Tune Motion
 
 Try a component's animation in chat before implementing it. Adjust easing, springs, and the motion curve while the preview runs.
 

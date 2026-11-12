@@ -1,97 +1,92 @@
 ---
 name: audit
-description: Audit design-system use against DESIGN.md when present and canonical project definitions across iOS apps (SwiftUI/UIKit), other codebases, and Framer projects through Framer MCP. Use to check every UI element, find hardcoded styles or detached components, audit tokens and variants, or detect design-system drift. Report a concise summary, prioritized findings, a before-and-after visual preview, existing replacements, exceptions, coverage, and changes since a comparable prior audit; fix only when requested. Not a general redesign or a request to invent a design system.
+description: Audit UI against DESIGN.md and established tokens, components, variants, and native conventions in codebases or Framer MCP. Use to find design-system drift, hardcoded styles, or detached components. Report evidence, existing replacements, and coverage; implement fixes only when requested. Not a general redesign or design-system creation task.
 ---
 
 # Audit
 
-Check UI against the project's established design system. Trace shared definitions and their uses before judging an element.
+Trace the project's established design rules, shared definitions, and uses before judging UI. Similar appearance does not establish equivalent meaning or system membership.
 
-Keep audits read-only unless the user explicitly requests fixes. Do not change source, configuration, assets, dependencies, or Framer state. Save reports, captures, and isolated previews only in authorized artifact locations, outside the audited project code. Follow stricter no-write requests. An explicit implementation request authorizes routine changes within that scope without asking again.
+Keep audits read-only unless fixes are explicitly requested. Do not edit source, configuration, assets, dependencies, or Framer state to inspect or illustrate a finding. Save reports and isolated previews only in authorized artifact locations; honor stricter no-write requests. An explicit implementation request authorizes routine fixes within that scope without asking again.
 
 ## Set the scope
 
-- Follow user and repository instructions, project and branch restrictions, and required tools. Recent activity alone does not identify the target.
-- Identify UI roots, application targets, packages, routes, theme files, component libraries, and relevant documentation. Use `rg --files` and batch independent reads when available.
-- Read the relevant adapters: [iOS](references/ios.md), [other codebases](references/codebases.md), or [Framer MCP](references/framer.md). Mixed projects may need more than one.
-- Read `DESIGN.md` at the project root and in relevant app or package directories. Follow its scope and references to canonical definitions. Use permitted project tools; do not bypass Framer MCP to find a local mirror. If documentation is absent or inaccessible, use available definitions and state the limit. Do not invent or create the missing document.
-- For a full audit, inventory first-party UI definitions and uses, then investigate shared causes. For a changed-files request, trace changed definitions to affected uses and name that narrower scope.
-- Exclude generated output, vendor internals, caches, and unrelated code. Inspect third-party components at the project's customization boundary. Keep previews, tests, examples, and inactive code separate from production UI.
-- For an every-element request, complete accessible structural coverage. Track inaccessible files, nodes, variants, and computed styles instead of silently substituting a sample.
+- Follow user/repository instructions, project and branch restrictions, and required tools. Recent activity alone does not identify the target.
+- Identify UI roots, application targets, packages, routes, theme files, and component libraries. Use `rg --files` and batch independent reads when available.
+- Read applicable adapters: [iOS](references/ios.md), [other codebases](references/codebases.md), or [Framer MCP](references/framer.md). Mixed projects may need more than one.
+- Read root and relevant package/app `DESIGN.md` files and follow their scoped references. If absent or inaccessible, use available owning definitions and state the limit. Do not create missing guidance or bypass Framer MCP to find a local mirror.
+- For a full audit, inventory first-party UI definitions and uses. For changed-files requests, trace changed definitions to affected uses and name the narrower scope.
+- Exclude generated output, vendor internals, caches, and unrelated code. Inspect third-party UI at its customization boundary. Separate previews, tests, examples, and inactive code from production UI.
+- For an every-element request, complete accessible structural coverage. Track inaccessible files, nodes, variants, and computed styles; do not silently substitute a sample.
 
-## Establish the design system
+## Establish authority
 
-Map the documented rules, tokens, shared components, styles, variants, themes, aliases, and approved exceptions. Record canonical names, owners, locations, and intended roles. Trace aliases to their definitions.
+Map documented rules, tokens, shared components, variants, themes, aliases, and approved exceptions. Record canonical names, owners, locations, and intended roles. Trace aliases to definitions.
 
 Use this order of authority:
 
 1. Current explicit user and project rules.
 2. Designated system definitions and documentation.
 3. Established shared implementations.
-4. Inferred repeated patterns.
+4. Inferred repeated patterns, which remain candidates.
 
-Report conflicts between authoritative sources. Repetition alone does not make a literal an approved token, and inferred conventions remain candidates.
+Verify documentation against owning definitions. Surface unresolved conflicts instead of silently choosing a source or rewriting either side. Repetition does not turn a copied literal into an approved token.
 
-Check `DESIGN.md` against the owning definitions. Report disagreements as source-of-truth conflicts; do not silently rewrite either source. Follow explicit precedence rules and surface unresolved conflicts between scoped documents.
+If no established system exists, identify reusable conventions and system gaps. Do not invent tokens, replacements, or a compliance verdict.
 
-If no established system exists, say so. Identify reusable conventions and consolidation candidates without inventing tokens, components, or a compliance verdict.
+## Classify each observation
 
-## Inspect definitions and uses
+Inspect shared definitions once, then trace caller overrides and contextual misuse. Check component membership, variants, semantic colors, typography, spacing, layout scales, radii, strokes, shadows, icons, motion, and relevant responsive/theme/platform branches where corresponding rules exist.
 
-Where project rules exist, check:
+Use this decision order:
 
-- Component membership, variants, wrappers, detached copies, and instance overrides.
-- Semantic colors, type, spacing, layout scales, radii, strokes, shadows, icon families and sizes, motion, and interaction states.
-- Responsive, appearance, accessibility, and platform-specific source branches.
-- Intended roles. An approved destructive color can still be wrong for neutral supporting text.
-
-Inspect shared definitions once, then trace overrides and contextual misuse. Group instances by cause and retain affected locations. Inspect conditions and variants without claiming to have exercised every runtime combination.
-
-| Outcome | Evidence |
+| Evidence | Classification |
 | --- | --- |
-| Uses system | A reference or approved native convention matches its intended role. |
-| Confirmed drift | An established rule is violated or a required shared definition is bypassed. |
-| Review candidate | A possible duplicate, near match, inferred inconsistency, or unclear role needs review. |
-| System gap | A reusable pattern has no suitable established component or token. This alone is not a violation. |
-| Approved exception | A documented or user-approved reason permits the difference. |
-| Unverified | Access, dynamic values, missing definitions, or runtime context prevents a conclusion. |
+| An applicable documented or user-approved exception permits the difference | Approved exception. Record its scope; do not turn it into a global exemption. |
+| Missing access, unresolved source conflict, computed values, or runtime context prevents a conclusion | Unverified. Name the evidence needed to decide. |
+| An established rule applies and the inspected implementation violates it | Confirmed drift. Cite both the implementation and the rule. |
+| A valid reference or approved native convention is used in its intended role | Uses system. |
+| A reusable need has no suitable established token or component | System gap. Missing support alone is not noncompliance. |
+| Only similarity, repetition, or an inferred convention suggests inconsistency | Review candidate. Do not promote proximity to proof. |
 
-Literal values can be valid for layout constraints, image ratios, computed geometry, or artwork. Round to a scale only when project rules support it. Matching appearance does not prove reference membership or equivalent semantics. Respect documented permission to use literal scale values.
+A token can be used in the wrong role: a destructive color on neutral supporting text may violate a semantic rule despite correct reference membership. A literal can be valid for canonical definitions, layout constraints, artwork, image ratios, or computed geometry. Replace it only when an applicable rule supports that change.
 
-For each finding, record the exact file and line or Framer node/component ID, observed implementation, applicable rule and its location, confidence, affected uses, and an existing replacement where supported. Mark unknown replacements explicitly. Keep gaps separate from noncompliance.
+Record exact file/line or Framer node/component ID, observed value or reference, rule location, confidence, affected uses, and an existing replacement whose semantics and API fit. Mark unknown replacements explicitly. A gap and an independent violation can coexist; do not count the same observation twice.
 
-Identify the smallest supported fix: a shared definition or individual uses. Explain its reach and avoid counting overlapping uses twice.
+## Prioritize supported fixes
+
+Rank confirmed findings by consequence and reach:
+
+1. Misrepresented meaning, missing required state distinctions, or broken theme/accessibility behavior established by evidence.
+2. Shared-definition drift affecting many uses.
+3. Isolated visual inconsistencies covered by explicit rules.
+
+Within a tier, prefer greater demonstrated reach and the smaller supported correction. Keep confidence separate from priority: a potentially serious candidate still needs evidence. Do not add general UX or accessibility findings without a design-system rule in scope.
+
+Fix at the shared owner when its definition is wrong; fix the caller when an override or role is wrong. Explain which uses a shared correction reaches and which overrides remain. Deduplicate by cause while retaining affected locations.
 
 ## Verify and report
 
-Inspect source first. Read existing lint or token-validator scripts before using them and verify that they are read-only. Skip mutating checks, automatic fixes, snapshot updates, dependency changes, and project-local generated output. Avoid installers, new dependencies, broad builds, and unrelated execution.
+Inspect source first. Read existing lint/token validators before running them and verify they are read-only. Skip automatic fixes, snapshot updates, dependency changes, project-local generated output, installers, broad builds, and unrelated execution.
 
-Render when a finding depends on appearance or behavior and tools are available. Otherwise mark that aspect unverified.
+Render when the conclusion depends on appearance or behavior and tools are available; otherwise mark that aspect unverified. Source handling does not prove every runtime combination.
 
-Report coverage separately:
+Follow [reporting and baseline comparison](references/reporting.md). Lead with inspected scope, canonical sources, confirmed groups and affected uses where known, then the highest-impact fixes. Keep clean results brief. Report coverage separately:
 
-- Structural: included and excluded targets, files, or pages; definitions and uses inspected; unresolved areas.
-- Visual: the screens, sizes, themes, and states actually viewed, or none.
-- Runtime: the interactions actually exercised, or none.
+- Structural: inventoried targets, definitions, uses, exclusions, and unresolved areas.
+- Visual: screens, sizes, themes, and states actually viewed, or none.
+- Runtime: interactions actually exercised, or none.
 
-Count inventoried units and name them, such as source occurrences, component uses, or Framer nodes. Search hits are not an element count. A sample does not establish full coverage. Do not invent compliance percentages. Keep grouped locations in an authorized workspace artifact when needed.
+Count only inventoried units and name them. Search hits are not an element count; a sample does not establish full coverage. Do not invent compliance percentages.
 
-Follow [the report and comparison guidance](references/reporting.md). Lead with scope, grouped issue counts and affected uses where known, and the highest-impact fixes. Give exact locations. Separate shared fixes, individual fixes, gaps, candidates, exceptions, and unknowns. State that the audit applied no fixes.
+Include a before-and-after visual for confirmed findings with supported fixes using [visual comparison guidance](references/visual-comparison.md). Distinguish captures, source-based reconstructions, and proposed previews. Keep previews isolated; explain identical-looking semantic changes. Preview checks do not verify product behavior. If tools or no-write constraints prevent a visual, return the audit with that specific limit.
 
-Include a before-and-after visual for confirmed findings with supported fixes, following [visual comparison guidance](references/visual-comparison.md). Label actual captures, source-based reconstructions, and proposed previews. Show supported light and dark appearances, and explain changes that look identical. Never alter the audited project, even temporarily, to create an after view. Preview coverage does not verify product behavior.
-
-Save a detailed report when locations, later implementation, repeat audits, or the user's request justify one. Follow the workspace artifact convention and link it. Honor strict no-write requests.
-
-Compare a previous audit only when project, branch, and scope are comparable. Report new, resolved, and remaining findings; mark anything not rechecked as unverified. If no usable baseline exists, say so. Do not invent trends or scores.
-
-Keep clean results brief. Prioritize shared causes and semantic misuse over isolated cosmetic differences.
+Save a detailed report when locations, later implementation, repeat audits, or the request justify one. Compare a baseline only after verifying comparable project, branch, scope, and rules; label findings not rechecked as unverified. State that an audit applied no fixes.
 
 ## Implement requested fixes
 
-When asked, use established tokens and components while preserving content, behavior, accessibility, and deliberate exceptions. Check canonical definitions and component APIs before replacements. Apply supported fixes and leave ambiguous candidates for review with reasons. Do not create a design system to make an audit pass.
+Check canonical definitions and APIs before replacing uses. Preserve content, behavior, accessibility, and deliberate exceptions. Implement supported fixes within scope; leave ambiguous candidates for review with reasons. Do not create a system to make the audit pass.
 
-Run focused existing checks and inspect changed UI when tools permit. Use the available show-work skill for fresh screenshots of visible changes. Report changes, verification, and remaining limits. Publishing and deployment require explicit authorization.
+Run focused existing checks and inspect changed UI when possible. Use the available show-work skill for fresh screenshots of visible changes. Report verification and remaining limits. Publishing and deployment require explicit authorization.
 
-## Project setup
-
-For installation or workflow adoption, provide the [DESIGN.md and AGENTS.md snippets](references/project-integration.md). Keep setup advice separate from routine findings. Edit project guidance only when requested. Naming the skill does not install it or guarantee invocation by every agent.
+For installation or workflow adoption, use [project integration guidance](references/project-integration.md). Edit project guidance only when requested; naming a skill does not install it or guarantee invocation.

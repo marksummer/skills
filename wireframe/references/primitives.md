@@ -64,7 +64,7 @@ A zone needs room for its label: about 44pt tall and most of the screen's width.
 
 The Structure level tidies zones by itself, so draw them where the regions really are and do not nudge them by hand: a zone within 28pt of a side edge lines up on the shared side margin (16pt, or 24pt on boards 700pt and wider), edges snap to a 4pt grid, every zone is at least 32pt each way, and neighbouring zones keep an 8pt gap. Order and rough position stay, so the blocks still line up with the other levels. A zone on a plain wrapper (no fill, border or shadow of its own, such as a `wf-pad` section) ignores the wrapper's top and bottom padding, so spacing a section with `padding-top` does not stretch its block; a zone on a card or list keeps the card's full edge. Labels sit top left; the purpose line is clamped to the room the block has and is always in the block's hover title.
 
-Notes appear as numbered pins. Add `data-note="..."` to the relevant element. Use two to six one-sentence notes per screen, covering intent, decisions, or open questions. Keep visual details out of notes.
+Notes appear as numbered pins. Add `data-note="..."` where a supplied decision or open question helps the review. Use one sentence per note; do not add notes to meet a quota. Describe an unknown rationale neutrally instead of inventing intent. Keep purely visual details out of notes.
 
 The pin sits just outside the element's top-right corner, so put notes on boxes (a row, card, button, chip group or zone) rather than on a bare line of text, where the pin would cover the end of the line. Pins that would land on top of each other are moved down automatically.
 

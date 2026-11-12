@@ -51,14 +51,14 @@ Codex and Cursor read `~/.agents/skills`:
 
 ```bash
 mkdir -p ~/.agents/skills
-ln -s ~/code/wireframes-skill/wireframes ~/.agents/skills/wireframe
+ln -s ~/code/wireframes-skill/wireframe ~/.agents/skills/wireframe
 ```
 
 Claude Code reads `~/.claude/skills` (Cursor reads it too):
 
 ```bash
 mkdir -p ~/.claude/skills
-ln -s ~/code/wireframes-skill/wireframes ~/.claude/skills/wireframe
+ln -s ~/code/wireframes-skill/wireframe ~/.claude/skills/wireframe
 ```
 
 Claude apps (claude.ai, desktop): zip the `wireframe/` folder and upload the zip as a custom skill.
@@ -77,6 +77,7 @@ wireframe/
   SKILL.md                 workflow the agent follows
   references/primitives.md board vocabulary (wf- classes, zones, notes, patterns)
   references/capture.md    getting screenshots from each kind of source
+  references/review-and-sharing.md presentation and optional hosted feedback
   assets/viewer.html       page template
   assets/example-boards.html
   scripts/build.py         builds the page, lints boards, renders check snapshots

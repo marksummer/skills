@@ -4,7 +4,7 @@
   <img alt="Skills by Mark Summer. Faster exploration. Deliberate design." src="assets/header-light.svg" width="1200">
 </picture>
 
-Five skills I use to work through interface ideas, simplify screens, and check the details.
+Six skills I use to work through interface ideas, simplify screens, and check the details.
 
 ## Choose a skill
 
@@ -13,6 +13,7 @@ Five skills I use to work through interface ideas, simplify screens, and check t
 | [Sketch](sketch/README.md) | Explore an interface idea with an interactive sketch. |
 | [Clean Up](clean-up/README.md) | Remove clutter, tighten copy, and improve an existing layout. |
 | [Tune Motion](tune-motion/README.md) | Try an animation and adjust it in chat. |
+| [Haptic Scout](haptic-scout/README.md) | Find where haptic feedback would help and what it should feel like. |
 | [Audit](audit/README.md) | Find where UI has drifted from the project's design system. |
 | [Wireframe](wireframe/README.md) | Turn an existing design into wireframes for review. |
 
@@ -29,6 +30,7 @@ Run this in your project, then choose Codex and the skills you want. Requires No
 | Sketch | The Visualize plugin in Codex for interactive previews. Without it, you get a layout outline. |
 | Clean Up | No extra dependency. Uses Impeccable when it is already installed. |
 | Tune Motion | The Visualize plugin in Codex and Python 3 for the preview generator. |
+| Haptic Scout | No extra dependency. Framer audits need a connected Framer MCP. |
 | Audit | Available capture and rendering tools for visual comparisons. Framer audits need a connected Framer MCP. |
 | Wireframe | Python 3.9 or later. Snapshot checks also need Chrome, Chromium, Edge, or Brave. |
 

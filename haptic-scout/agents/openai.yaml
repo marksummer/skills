@@ -1,0 +1,4 @@
+interface:
+  display_name: "Haptic Scout"
+  short_description: "Find moments where haptic feedback helps"
+  default_prompt: "Use $haptic-scout to find where haptic feedback would improve this interface."

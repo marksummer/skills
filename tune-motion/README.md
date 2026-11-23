@@ -25,6 +25,6 @@ Ask to apply the chosen motion when you are ready. If the saved values are unava
 
 ## Example
 
-[Download the accent picker](https://raw.githubusercontent.com/marksummer/skills/main/examples/accent-picker.html) and open it in a browser.
+Open the [accent picker example](../examples/accent-picker.html), choose **Download raw file**, then open the saved HTML file in your browser.
 
 [Instructions](SKILL.md) · [Editor design](DESIGN.md) · [All skills](../README.md)

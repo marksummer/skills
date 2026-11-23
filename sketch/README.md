@@ -23,6 +23,6 @@ A sketch with readable sample content and working local interactions. Revisions 
 
 ## Example
 
-The [reminder-entry demo](https://raw.githubusercontent.com/marksummer/skills/main/examples/batch-reminders.html) explores editable rows, keyboard entry, and multiline paste. Download it and open it in a browser.
+The [reminder-entry demo](../examples/batch-reminders.html) explores editable rows, keyboard entry, and multiline paste. Choose **Download raw file** on GitHub, then open the saved HTML file in your browser.
 
 [Instructions](SKILL.md) · [All skills](../README.md)

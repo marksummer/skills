@@ -63,7 +63,7 @@ Use $sketch to explore batch reminder entry: one editable row per reminder,
 with adding, removing, and pasting multiple lines.
 ```
 
-[Download the example](https://raw.githubusercontent.com/marksummer/skills/main/examples/batch-reminders.html) and open it in your browser. It runs locally without a backend. Ask to refine an element, compare options, or expand the sketch into a screen.
+Open the [batch reminder example](examples/batch-reminders.html), choose **Download raw file**, then open the saved HTML file in your browser. It runs locally without a backend. Ask to refine an element, compare options, or expand the sketch into a screen.
 
 [Usage](sketch/README.md) · [Instructions](sketch/SKILL.md)
 
@@ -81,7 +81,7 @@ Use $tune-motion to show the accent picker expanding and collapsing
 so I can tune its animation.
 ```
 
-[Download the example](https://raw.githubusercontent.com/marksummer/skills/main/examples/accent-picker.html) and open it in your browser.
+Open the [accent picker example](examples/accent-picker.html), choose **Download raw file**, then open the saved HTML file in your browser.
 
 [Usage](tune-motion/README.md) · [Instructions](tune-motion/SKILL.md)
 

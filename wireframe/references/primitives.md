@@ -68,7 +68,7 @@ Notes appear as numbered pins. Add `data-note="..."` where a supplied decision o
 
 The pin sits just outside the element's top-right corner, so put notes on boxes (a row, card, button, chip group or zone) rather than on a bare line of text, where the pin would cover the end of the line. Pins that would land on top of each other are moved down automatically.
 
-Add `data-keep` to retain real text at Low-fi, where body text normally becomes grey lines. Use it for essential words, such as a status that changes the screen's meaning.
+Apply `data-keep` to the body or meta element itself to keep its real text at Low-fi. For example, `<p class="wf-meta" data-keep>Add a delivery address to continue</p>` retains the reason a checkout action is disabled.
 
 ## 3. Layout
 
@@ -139,6 +139,8 @@ Field names in form and settings rows ("Starts", "Service Type") are structure, 
 | `wf-segmented` | children `is-selected` | Segmented control; each child is one segment. |
 | `wf-progress` | | Progress bar; set `--value:40%`. |
 | `wf-bubble` | `is-mine` | Chat bubble; put plain text inside. |
+
+Use `<button type="button" class="wf-btn" disabled>` for an action that is disabled in the source or `aria-disabled="true"` on a static button placeholder. The state and label remain visible at Mid-fi and Low-fi.
 
 ## 7. Overlays and glyphs
 

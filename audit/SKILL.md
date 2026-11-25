@@ -1,6 +1,6 @@
 ---
 name: audit
-description: Audit UI against DESIGN.md and established tokens, components, variants, and native conventions in codebases or Framer MCP. Use to find design-system drift, hardcoded styles, or detached components. Report evidence, existing replacements, and coverage; implement fixes only when requested. Not a general redesign or design-system creation task.
+description: Audit UI for drift from established design rules, token roles, components, and variants in code or Framer. Use for a read-only design-system review or to implement supported fixes when requested.
 ---
 
 # Audit
@@ -69,19 +69,14 @@ Fix at the shared owner when its definition is wrong; fix the caller when an ove
 
 Inspect source first. Read existing lint/token validators before running them and verify they are read-only. Skip automatic fixes, snapshot updates, dependency changes, project-local generated output, installers, broad builds, and unrelated execution.
 
-Render when the conclusion depends on appearance or behavior and tools are available; otherwise mark that aspect unverified. Source handling does not prove every runtime combination.
+Render or exercise the affected state when the conclusion depends on appearance or behavior. Mark that aspect unverified if you cannot inspect it. Source inspection alone does not establish runtime behavior.
 
-Follow [reporting and baseline comparison](references/reporting.md). Lead with inspected scope, canonical sources, confirmed groups and affected uses where known, then the highest-impact fixes. Keep clean results brief. Report coverage separately:
+Match the evidence to the finding:
 
-- Structural: inventoried targets, definitions, uses, exclusions, and unresolved areas.
-- Visual: screens, sizes, themes, and states actually viewed, or none.
-- Runtime: interactions actually exercised, or none.
+- When a binding establishes the finding, cite the current reference, governing rule, and supported replacement. Use that evidence on its own when the difference is semantic. Matching rendered values can diverge across themes while the roles stay the same.
+- When appearance or a visible state explains a confirmed finding with a supported fix, show matched before-and-after views. Include visuals when requested. Follow [visual comparison guidance](references/visual-comparison.md) for matching, provenance, and isolated previews. Report any rendering limits.
 
-Count only inventoried units and name them. Search hits are not an element count; a sample does not establish full coverage. Do not invent compliance percentages.
-
-Include a before-and-after visual for confirmed findings with supported fixes using [visual comparison guidance](references/visual-comparison.md). Distinguish captures, source-based reconstructions, and proposed previews. Keep previews isolated; explain identical-looking semantic changes. Preview checks do not verify product behavior. If tools or no-write constraints prevent a visual, return the audit with that specific limit.
-
-Save a detailed report when locations, later implementation, repeat audits, or the request justify one. Compare a baseline only after verifying comparable project, branch, scope, and rules; label findings not rechecked as unverified. State that an audit applied no fixes.
+Lead with scope, canonical sources, and confirmed findings by priority. State what you inspected in source, viewed, and exercised, including any gaps. Count only inventoried units and identify read-only results as such. Follow [reporting guidance](references/reporting.md) for detailed reports or baseline comparisons.
 
 ## Implement requested fixes
 

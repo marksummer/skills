@@ -20,7 +20,7 @@ Point it at the project or name the screens and files you want checked. It reads
 
 A short summary with prioritized findings, exact locations, and existing replacements where supported. Repeated issues are grouped by cause. The report separates confirmed drift from review candidates, system gaps, and approved exceptions.
 
-Supported fixes include a before-and-after preview when tools permit. Coverage states what was inspected in source, viewed, and exercised. A comparable earlier audit can show what is new, resolved, or still present.
+When appearance or a visible state explains a finding, the report includes a matched before-and-after preview if tools permit. Findings established by a binding cite that binding, the governing rule, and the supported replacement. Coverage states what was inspected in source, viewed, and exercised. A comparable earlier audit can show what is new, resolved, or still present.
 
 Audits leave the project unchanged. Ask explicitly to implement fixes.
 

@@ -24,7 +24,7 @@ Preserve supplied endpoints and chosen values. When starting from a description,
 | An existing element moves or changes shape | Use `EASE_IN_AND_OUT` to ease between established states. |
 | Progress that must represent constant change | Use `LINEAR`; easing would distort the apparent rate. |
 
-For timed UI transitions without supplied timing, start at 200ms for a small control and 280ms for a larger panel. Larger travel needs more time to remain legible. These are tuning defaults, not limits on user choices or spring settling time. Distinguish Slow playback from product duration.
+For timed UI transitions without supplied timing, start at 200 ms for a small control and 280 ms for a larger panel. Larger travel needs more time to remain legible. Preserve the user's timing when given.
 
 For a new dialog/popover scale entrance, start near full size (around 0.95), because growing from a point implies a different physical origin. Preserve a real expansion from its trigger when the supplied geometry calls for one. Do not add overshoot to bounded properties such as opacity.
 
@@ -42,13 +42,16 @@ Follow [DESIGN.md](DESIGN.md) for the Linear-inspired editor. Preserve the compo
 
 Use [scripts/create_preview.py](scripts/create_preview.py) to reuse [assets/editor.html](assets/editor.html), which contains the motion engine and controls. Write the component markup and pose renderer using [references/component-adapter.md](references/component-adapter.md). Resolve paths from this skill's directory.
 
+Pass the chosen motion explicitly so the script's fallback settings do not override the decision. Use `--preset` for a built-in easing or spring. For timed motion, pass `--duration` in milliseconds and use `--bezier` when the user supplies control points. For a custom spring, pass `--spring MASS STIFFNESS DAMPING`. Omit `--duration` for a spring so its parameters determine settling time.
+
 ```bash
 python3 <skill-dir>/scripts/create_preview.py \
-  --name "Accent picker" \
-  --description "Expand the palette and rotate the divider; reverse to collapse." \
+  --name "Filter popover" \
+  --description "Open the popover from its filter button and close it again." \
+  --preset EASE_OUT --duration 200 \
   --markup <task-dir>/component.html \
   --adapter <task-dir>/component.js \
-  --output <writable-visualization-dir>/accent-picker-motion.html
+  --output <writable-visualization-dir>/filter-popover-motion.html
 ```
 
 Choose a durable, writable location using Visualize's current instructions. The helper writes a fragment and requires `--force` to replace an existing output. For revisions, keep the output path and component key stable and retain chosen settings when available.
@@ -66,19 +69,10 @@ Keep one component preview and the controls specified in DESIGN.md. Add comparis
 
 ## Check and present
 
-Check both endpoints, an intermediate pose, and a bouncy style. While a loop runs, verify that duration, spring values, and curve dragging change the component itself. Check the complete return cycle and a narrow chat width. Report any checks you could not complete.
+Confirm the first render and its specification use the chosen settings. Check both endpoints, an intermediate pose, a bouncy style, and the complete return cycle. During a loop, verify that duration, spring values, and curve edits change the visible pose and immediately update the specification. Check a narrow chat width and report any checks you could not complete.
 
 Return the inline preview using Visualize's required content reference, with brief accompanying prose.
 
-The read-only instruction must update immediately after valid slider, curve, preset, and restored-state changes. Show spring values to at most one decimal place in controls and the summary; retain full precision internally and in exports. Keep the summary short and the full read-only specification inspectable under Full specification. Copy must include the full specification without pausing playback.
-
-The specification must contain:
-
-- Current parameters at full precision, property mappings, and geometry/styles.
-- Actual renderer and sampler reference code.
-- Opening and closing equations, endpoint and clamping rules, and units.
-- Interruption and reduced-motion behavior.
-
-Separate demonstration controls such as Loop, Slow, holds, and framing from product requirements. Use selected numeric values, not just preset labels or rounded displays. Verify the exported sampler and poses against the preview, including overshoot and closing. Do not add Draft or Refresh controls, or claim the widget can fill the host chat composer without that capability.
+Verify that Copy includes the full [motion specification](references/component-adapter.md#export) without pausing playback. Compare the exported sampler and poses with the preview, including overshoot and closing. Treat Loop, Slow, holds, and framing as preview controls.
 
 When the user asks to apply the motion, read available widget state or their copied instruction. If chosen values are unavailable, ask for the instruction; a screenshot is not enough to recover them. Follow the product's tools and authorization requirements. A preview alone does not authorize product changes or publication.

@@ -1,6 +1,6 @@
 ---
 name: sketch
-description: "Explore interface ideas with quick, interactive sketches. Use for layout or interaction exploration and comparisons; focus on one element unless a screen or flow is requested."
+description: "Explore an interface decision with a quick, interactive sketch. Use to try or compare layouts, interactions, or visual choices at the requested element, screen, or flow scope."
 ---
 
 # Sketch
@@ -25,28 +25,32 @@ A sketch request alone does not authorize product implementation or publication.
 
 ## Use Visualize
 
-Find the installed `visualize:visualize` skill in the current catalog and read its full `SKILL.md` before creating or revising a sketch. Follow its current output contract, UI mockup guidance, and relevant mockup or variant references. Resolve its location from the catalog; do not hardcode a plugin version or duplicate its runtime instructions.
+Find the installed `visualize:visualize` skill in the current catalog. Read its full instructions and UI mockup guidance before building or revising. Use its current product styling, checks, and inline response format. Keep presentation controls outside the depicted product.
 
-If Visualize is unavailable, explain the dependency and provide a short layout outline. Only claim an interactive result when one was rendered.
+If Visualize is unavailable, explain the dependency and provide a short outline. Only claim an interactive result when one was rendered.
+
+## Compare what the user wants to decide
+
+- Vary the property or set of choices named in the request. Keep the task, sample content, and other choices stable so the user can tell what caused the difference.
+- For layout or interaction comparisons, change the relevant grouping, control placement, information visibility, or sequence. Use Visualize's variant carousel for structurally distinct alternatives unless the user requests simultaneous views.
+- For a visual comparison on the same layout, keep one sketch and its interaction state. Switch between the requested values locally, or show paired swatches when context is unnecessary. For two accent palettes on a reminder picker, change the colors while keeping the labels, positions, and current selection fixed.
 
 ## Build the sketch
 
-Use Visualize's guidance for existing context; avoid searching the project solely to make a mockup.
+Use the product context already available. Avoid searching the project solely to make a mockup.
 
 - Keep fidelity low so feedback stays on hierarchy and behavior. Use neutral colors and simple boundaries, while preserving distinctions needed to understand selection, errors, disabled controls, and focus. Keep color or imagery when it is part of the decision. Add decorative branding only when requested.
 - Use plausible sample content and real action labels. Use placeholders for images and unknown content.
 - Keep repeated editable items in a consistent row structure so people can scan and compare them. Place item actions beside the item they affect. Put information required for the current decision beside its control; reveal optional detail when requested. Adapt these defaults to explicit user choices and platform conventions.
 - Make controls work locally when they help answer the question. Selection should change the visible state; forms should give plausible feedback. For flows, connect the requested screens and provide a way back. Keep simulated actions local and make their limits clear.
 - Include empty, loading, error, or confirmation states when they affect the decision.
-- For alternatives, change a decision-relevant feature: grouping, action placement, navigation, information visibility, or interaction sequence. Color, radius, or spacing changes alone do not count as different directions. Keep the task and sample content consistent so the comparison isolates the design choice. Follow Visualize's variant carousel guidance.
-- Apply Visualize's product-specific styling inside the depicted interface. Keep presentation controls outside it and limited to useful layout choices.
 - Support the requested platform and narrow chat widths. Keep labels readable, controls keyboard accessible, and essential actions available without hover.
 
 ## Check and present
 
-Read back the generated fragment. Use Visualize's checks and preview workflow when available. Perform the main action and confirm its visible result; exercise reversal or recovery when included. Check the narrow layout and keyboard access to included controls, and navigation when included. Fix broken controls, clipping, and unreadable states. Report checks you could not exercise; source inspection alone does not establish interaction behavior.
+Read back the generated fragment. Perform the main action and confirm its visible result. For a comparison, switch alternatives and check that the shared choices and content still match. Exercise included navigation or recovery. Check keyboard access and narrow layouts. Fix broken controls, clipping, and unreadable states. Report checks you could not exercise.
 
-Return the inline visualization using Visualize's required final-response content reference. Add only a short explanation of a layout decision or consequential assumption. Keep implementation details out of the sketch and its explanation.
+Return the sketch with a short explanation only when a decision or consequential assumption needs it.
 
 For revisions, preserve agreed choices and fidelity unless the user changes direction. Update the existing sketch when practical and return its updated visualization reference. Move to polished design or product implementation when requested.
 
@@ -54,5 +58,6 @@ For revisions, preserve agreed choices and fidelity unless the user changes dire
 
 - "Show an alternative accent picker."
 - "Compare two ways to show the selected color."
+- "Show two accent palettes on the same reminder picker. Keep the layout and behavior identical."
 - "Show the complete iPhone reminder creation screen."
 - "Sketch onboarding with working next and back buttons."

@@ -62,9 +62,11 @@ Replace the sample content with the brief's actual content. Allow enough scene h
 
 ## Generator options
 
-`--preset` accepts a built-in easing or spring enum, such as `EASE_OUT` or `BOUNCY`; the default is `EASE_OUT`.
+Choose one of `--preset`, `--bezier X1 Y1 X2 Y2`, or `--spring MASS STIFFNESS DAMPING`. Presets include `EASE_OUT` and `GENTLE`. Bézier control points and spring parameters retain supplied precision.
 
-`--duration` sets Bézier duration in milliseconds, defaulting to 300. Spring duration comes from its physical parameters, so do not combine a spring preset with `--duration`. The editor lets users customize all values.
+Pass `--duration` in milliseconds for a timed preset or custom Bézier. Omit it for a spring, which computes duration from its parameters at startup. Without any motion options the script falls back to `EASE_OUT` at 300 ms.
+
+Custom values use the editor's numeric ranges. Bézier x values are 0–1 and y values are −3–4. Spring mass is 0.1–10, stiffness is 1–10,000, and damping is 1–1,000. The spring starts at zero velocity on each leg.
 
 `--key` sets the component identity used for persistence. It defaults to the name's slug. Reuse it for revisions; snapshots from another key are ignored.
 
@@ -72,11 +74,12 @@ Replace the sample content with the brief's actual content. Allow enough scene h
 
 ## Export
 
-The compact instruction describes the component and current motion. Copy includes the inspectable full specification with:
+The compact instruction and the read-only specification update after valid edits and restored settings. Copy includes the inspectable full specification with:
 
 - Parameters at full precision, property mappings, and initial scene markup/styles.
 - The actual adapter factory and layout helper.
 - The actual analytic spring/inverse-Bezier sampler source.
+- Opening and closing equations, units, endpoint and clamping rules, interruption, and reduced-motion behavior.
 
 Keep the adapter self-contained with `preview` and the supplied context. The template's included layout/q helper is also available. Avoid other outer editor variables, external assets, and independent clocks. Put additional constants inside the adapter and define geometry and transform origins explicitly.
 

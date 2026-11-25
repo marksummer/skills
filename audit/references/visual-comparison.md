@@ -1,12 +1,12 @@
 # Visual comparisons
 
-Include a before-and-after comparison when confirmed findings have supported fixes. Keep the audited project read-only unless implementation was explicitly requested. A preview does not authorize changes.
+Use a comparison when appearance or a visible state explains a confirmed finding with a supported fix, or when the user asks for visuals. Keep the audited project read-only unless implementation was explicitly requested. A preview does not authorize changes.
 
 ## Choose the states
 
 - Tie each comparison to a finding ID, exact source or node, established rule, and existing replacement. Reuse the audit evidence.
 - Show the state that exposes the issue. Match content, viewport or device, state, theme, and accent so only the proposed fix differs.
-- Cover confirmed groups with supported replacements. For many groups, use a compact picker or show the highest-impact examples and name the omitted groups. Group repeated instances.
+- Cover the confirmed groups where the comparison explains the finding. For many groups, use a compact picker or show the highest-impact examples and name the omitted groups. Group repeated instances.
 - Preserve exceptions and surrounding layout. Keep redesign and invented content outside the audit.
 - Leave unresolved source conflicts and system gaps out of confirmed-fix views. If alternatives are requested, label them as review options.
 
@@ -41,7 +41,7 @@ For a strict no-write request, use available captures or an artifact-free compar
 
 Show matching light and dark views when supported. An appearance selector may change only the isolated preview. Match the inspected palette and label assumed accent choices. Do not invent an unsupported dark theme. Label source-based dark views as previews; they do not verify the product's theme switcher.
 
-For changes with identical appearance, preserve both views and add a short semantic, binding, or accessibility-tree annotation. For example: `h1` to `p`, same 15px styling. Do not invent a visual difference or claim a screen-reader announcement without testing.
+If the user requests visuals for an identical-looking change, annotate the aspect that actually changes, such as the binding, semantic role, or verified accessibility-tree property. Preserve the inspected appearance.
 
 Use side-by-side views when readable and stack them on narrow screens. Keep copy at its actual scale, essential controls available without hover, and labels clear. Include only controls that help assess the finding.
 
@@ -49,4 +49,4 @@ Use side-by-side views when readable and stack them on narrow screens. Keep copy
 
 When tools permit, inspect interactions, labels, type, narrow-width fit, and supported appearances. Otherwise use non-mutating markup and state checks and disclose rendering limits. Follow tool and security restrictions.
 
-Embed the visual beside the findings in the final response. Name captured and source-based states and remaining unknowns. Report preview checks separately from product verification. State that no project fixes were applied. If no supported fixes exist, omit the comparison and say so.
+Place any visual beside its finding. Label captured and source-based states and name remaining unknowns. Report preview checks and product verification separately.

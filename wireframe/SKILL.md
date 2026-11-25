@@ -20,27 +20,17 @@ Identify the supplied screens, their main tasks, and the question the review sho
 
 Choose the starting view from the review question; use Mid-fi when none is supplied. Structure suits prioritization; Low-fi suits grouping; Mid-fi suits wording. Keep all levels available in the default deliverable. Audience is a useful hint, not a substitute for the stated question.
 
-Do not hide a status or label that changes the task's meaning just because it is body text. Use `data-keep` for those words at Low-fi. A wireframe should reduce distraction without changing what reviewers believe the screen allows.
+At Low-fi, keep text or symbols that tell reviewers what the user can do, what blocks an action, what is selected, or what just happened. Use `data-keep` on body or meta text that carries one of those facts, and a meaningful glyph or label for an icon-only control. If color is the only cue, translate its source-supported meaning into a grayscale cue or flag it in a review note. Reduce other prose to grey lines so grouping is easier to judge without losing the task's meaning.
 
 Paths below are relative to this skill's folder.
 
 ## Get the design
 
-Save one image per screen in flow order in a task-owned work folder, such as `wireframe/<flow-name>/shots/` or a temporary folder. Copy supplied files with short names such as `01-home.png`. Keep the source project unchanged unless the user asks for implementation.
-
-Read [capture guidance](references/capture.md) for the supplied source. Measure before drawing:
-
-```bash
-python3 <skill-dir>/scripts/build.py --measure <work-dir>/shots/*.png
-```
-
-Use the screenshot's point width and divide pixel measurements by its scale. If an image is unavailable, request it for the original comparison. A source-only reconstruction may proceed when agreed; omit `data-design` and label the missing original rather than presenting a reconstruction as a capture.
+Use [capture guidance](references/capture.md) to save an original image per screen and set the board geometry before drawing. A known capture viewport, frame size, or export scale takes precedence over the measurement helper's guess because the same pixel dimensions can come from different devices and scales. Keep the source project unchanged unless the user asks for implementation.
 
 ## Map the screen
 
-Before markup, list regions top to bottom with a stakeholder-facing name, user purpose, and priority: 1 for the main job, 2 for support, 3 for minor content. Base priority on the task and supplied context, not visual size alone. Mark uncertain purpose as an open question; ask only when it would change the structure.
-
-Write the screen purpose in one sentence. Put the region list in an HTML comment at the top of its `<template>` in `boards.html`; the build strips comments.
+Give the screen a one-sentence purpose. Map regions top to bottom with a stakeholder-facing name, user purpose, and priority. Give the main job priority 1, supporting content priority 2, and minor content priority 3. A small region can be primary if it explains how to continue the task. Mark uncertain purpose as an open question and ask only when it would change the structure.
 
 ## Draw and calibrate one screen
 
@@ -48,7 +38,7 @@ Read [board primitives](references/primitives.md) and follow [the example](asset
 
 - Match point width, region positions, heights, side padding, and text hierarchy. Set the status bar's `data-time` from the image. Calibrate recurring measurements on the first screen before copying them.
 - Transcribe visible words for Mid-fi. Replace personal names, emails, phone numbers, and addresses in board markup with realistic samples of similar length so anonymization does not change the layout.
-- Use one primitive per meaningful element. Omit background art, gradients, and decorative icons. Preserve symbols that identify controls or communicate state; a blank square must not erase the meaning of Play or Close.
+- Use one primitive per meaningful element. Omit background art, gradients, and decorative icons. Preserve control states, including disabled actions, in the primitives.
 - Give top-level regions `data-zone`, `data-purpose`, and `data-priority`. Do not nest zones: only the outer one renders. Put a single control's zone on its full-width row so its label has room.
 - Add `data-note` for supplied decisions or useful open questions. Use neutral descriptions when rationale is unknown; never invent intent or add notes to meet a quota. Attach pins to boxes or rows so they do not cover words.
 - Use inline styles only for size, spacing, and position. The levels own color, fonts, shadows, and opacity; hardcoded styling would leak polish across levels.

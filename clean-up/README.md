@@ -6,7 +6,7 @@ Remove clutter, tighten copy, and improve an existing layout. Keep the behavior,
 
 Follow the [installation steps](../README.md#install) and choose Clean Up.
 
-You can also copy this `clean-up` folder into `~/.codex/skills/` manually. Impeccable is optional: the skill uses its distill guidance, and layout guidance when relevant, if it is already installed. It is not bundled or installed automatically.
+You can also copy this `clean-up` folder into `~/.codex/skills/` manually. For broader layout changes, the skill can consult the distill or layout guidance in an existing Impeccable installation.
 
 ## Use
 

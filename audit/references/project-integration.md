@@ -17,7 +17,7 @@ Report:
 - Confirmed deviations and exact locations.
 - Existing replacements and shared-source fixes.
 - Exceptions, missing system support, and uncertainties.
-- A before-and-after visual showing supported proposed fixes.
+- Matched before-and-after views when appearance or a visible state explains the finding.
 - What was inspected and what remains unverified.
 
 Keep the audit read-only. Implement findings only when explicitly

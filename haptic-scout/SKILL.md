@@ -1,6 +1,6 @@
 ---
 name: haptic-scout
-description: Audit an app or website for places where standard or custom haptics would help. Use when asked where to add a haptic or where richer feedback would improve an interaction. Give a short, read-only report with where the cue goes, why it helps, what it should feel like on the target platform, and how strongly you recommend it.
+description: Audit where tactile feedback would help an app or web interaction. Use for haptic or vibration recommendations. Report the trigger, benefit, feel, and recommendation strength. Default to a read-only audit.
 ---
 
 # Haptic Scout
@@ -23,9 +23,9 @@ Run a read-only audit for the few moments where touch would tell the user someth
 ## Assess each candidate
 
 - **Purpose.** Name what the user would learn by feeling the cue. Routine taps, hover, scrolling, and background changes rarely justify a pulse.
-- **Timing.** Name the exact state transition, when it rearms, and which paths should stay silent. For an async result, trace the final outcome and confirm it still belongs to the current user-initiated operation and is relevant in the visible interaction. A canceled, superseded, or stale operation should stay silent.
-- **Frequency.** Judge the cadence within a gesture and across a session. Prefer one cue per action unless multiple cues convey distinct information at perceptibly different moments. If fast movement makes detent ticks blur, consider coarser milestones. At a gesture boundary, use an existing separate reset threshold where appropriate or fire once per gesture.
-- **Existing feedback.** Identify who owns the cue on each runtime and avoid duplicate tactile feedback. The state should remain visible and accessible with haptics disabled or unavailable. Use accessible state or value for controls and status messages for meaningful outcomes. [WCAG status messages](https://www.w3.org/WAI/WCAG22/Understanding/status-messages.html)
+- **Timing.** Play an arming cue once when the interaction enters its armed state. Repeated updates while armed stay silent. Within a gesture, rearm only when the app's separate reset transition fires. Each new gesture can cue again. Cancellation ends the gesture in silence. For async results, play only when the outcome belongs to the current user-initiated operation and is still relevant in the visible interaction. Canceled, superseded, and stale operations stay silent.
+- **Frequency.** Prefer one cue per action. Add another only when it conveys different information at a perceptibly different moment. If fast movement makes detent ticks blur, use coarser milestones.
+- **Ownership.** Give each transition one feedback owner per runtime. A gesture callback and a state observer can both see one change and produce two pulses. Reuse the existing owner when it already covers the event. Keep the state visible and accessible with haptics disabled or unavailable. Use accessible state or value for controls and status messages for meaningful outcomes. [WCAG status messages](https://www.w3.org/WAI/WCAG22/Understanding/status-messages.html)
 
 ### Decide what to recommend
 
@@ -38,20 +38,13 @@ Run a read-only audit for the few moments where touch would tell the user someth
 
 Judge how much the cue would help, then check where it can be delivered. Recommend an addition or upgrade when it has a clear benefit, a precise trigger, and an appropriate cadence. An existing cue is worth upgrading when a different feel would help the user notice something the current cue misses. If trigger, coverage, or compatibility is uncertain enough to change that decision, record what would resolve it.
 
-## Look for a richer feel
+## Choose the effect
 
-Actively look for moments where a custom effect could give an interaction a distinctive feel or make a physical change easier to read. Compare it with the closest system effect. A familiar selection or success cue often fits. A custom effect earns its place when the interaction benefits from a noticeable change in texture, strength, or timing.
+Start with the closest system effect. A selection tick can mark a snap or newly armed action. If an existing cue already tells the user that the transition happened, skip an additional pulse. Recommend a custom effect only when you can name useful information the system cue would miss and explain how the new feel conveys it.
 
-- **Pulling into a snap point.** Let a soft sensation build near the actual snap point. End the rise with one crisp click when the object locks in. Ease the rise as the finger backs away and stop it when the drag ends or is canceled.
-- **Landing a moving object.** Use one short impact as the object settles. Vary the strength with the landing speed within a subtle range.
-- **Crossing fine steps and major marks.** Make some marks feel different so the user can count or find an important value. Keep the smaller steps light and drop intermediate ticks when the user moves quickly.
+A soft rise near a snap point can help the user steer if their finger covers the guide and the remaining distance changes how they move. Ease the rise as they back away and stop it on release or cancellation. The snap itself still gets a single tick. A faster landing or a major mark can feel stronger when the distinction helps users judge weight, count steps, or find a target.
 
-## Recommend the effect by runtime
-
-- **iOS.** Use an existing helper or a SwiftUI or UIKit effect when it can deliver the intended feel. For custom effects, consider Core Haptics on supported devices. Use a short transient for a click, a continuous event for a texture or rise, and dynamic intensity or sharpness when the feel follows a gesture. An AHAP file can hold a reusable, fixed pattern. Check deployment and hardware support, including `CHHapticEngine.capabilitiesForHardware().supportsHaptics`. Choose a matching system effect or silence as the fallback. [Apple haptics guidance](https://developer.apple.com/design/human-interface-guidelines/playing-haptics) · [Core Haptics](https://developer.apple.com/documentation/corehaptics)
-- **Android.** Start with action-based system feedback for familiar controls. For custom feel, check which composition or envelope APIs the app can use and whether the device supports the required effects. Choose a matching system effect or silence as the fallback. [Android custom haptic effects](https://developer.android.com/develop/ui/views/haptics/custom-haptic-effects)
-- **Hybrid apps.** Trace the wrapper to the registered plugin and the implementation on each platform. Check the installed dependency version and deployment targets. A resolved bridge call alone leaves physical playback unverified. Apply the browser checks when the same screen runs outside the app.
-- **Web.** Treat `navigator.vibrate()` as optional basic vibration. For a richer effect a browser cannot reproduce, use the visible or accessible cue without vibration. Verify current browser and device support, API presence, document visibility, and prior user activation (sticky activation) in the actual frame. Check the exact trigger on a fresh page and after activation. The first touch drag can reach a threshold before release grants activation. If vibration is unavailable at that moment, keep the visible and accessible cue and skip the pulse. API presence or a successful return value leaves physical playback unverified. [W3C Vibration API](https://www.w3.org/TR/vibration/) · [HTML activation events](https://html.spec.whatwg.org/multipage/interaction.html#activation-triggering-input-event)
+Read the applicable section of [runtime checks](references/runtime.md) when checking delivery or building the effect. Code, callback traces, and successful API returns can verify cue routing. Only a supported physical device can verify playback and feel.
 
 ## Report
 
@@ -69,14 +62,14 @@ If a finding needs testing, say in **Why** what would make the cue worth keeping
 
 Example
 
-### Dragging a card into a grid slot
+### Arming Archive with a swipe
 
-- **Why** — You can feel the card lock into place even if your finger covers the outline.
-- **Haptic** — On supported iPhones, a soft rise as the card nears the slot and one crisp click as it snaps in.
-- **Strongly recommended**
+- **Why** — A tick tells you when releasing the swipe will archive the message, even if your finger covers part of the row.
+- **Haptic** — On supported iPhones, one short system selection tick when Archive arms. A reverse swipe can rearm the tick only after the row resets. Keep the visible and accessible armed state when web vibration is unavailable.
+- **Recommended**
 
 ## When asked to build a recommendation
 
 Implement the chosen effect at the event identified in the audit. Define what plays and when, and what cancels or rearms it. For a custom pattern, choose starting timing, intensity, and sharpness or platform equivalents, and connect them to the relevant gesture value if the effect is interactive. Tune the starting values on hardware when available.
 
-Reuse the app's feedback owner and settings so the new effect replaces any cue on that same event. For Core Haptics, reuse the engine and stop ongoing effects on cancellation, interruption, or when leaving the interaction. Recover from engine stops and resets for the next eligible event. Check that supported hardware plays the intended effect in sync with the visual or audio feedback. Verify that turning haptics off suppresses the cue while the interaction still works. [Apple engine setup](https://developer.apple.com/documentation/corehaptics/preparing-your-app-to-play-haptics) · [Apple real-time haptic parameters](https://developer.apple.com/documentation/corehaptics/updating-continuous-and-transient-haptic-parameters-in-real-time)
+Reuse the app's feedback owner and settings. Stop ongoing effects on cancellation, interruption, or when leaving the interaction. On supported hardware, check timing against visible or audio feedback and verify the interaction still works when the cue is off.

@@ -23,6 +23,7 @@ import argparse
 import base64
 import datetime as _dt
 import html
+import math
 import os
 import re
 import shutil
@@ -262,9 +263,10 @@ def snap(out: str, boards, only) -> None:
     def one(board):
         sid, w, h = board
         cols, gap = 5, 32
-        row_w = cols * w + gap * (cols - 1)
-        scale = min(1.0, 2400.0 / row_w)
-        width = int(row_w * scale) + 48 + 16
+        gap_width = gap * (cols - 1)
+        # The viewer scales the boards but leaves the CSS gaps at full width.
+        scale = round(min(1.0, (2400 - gap_width) / (cols * w)), 3)
+        width = math.ceil(cols * w * scale) + gap_width + 48 + 16
         height = int(h * scale) + 16 + 32 + 30 + 20 + 16
         png = os.path.join(snap_dir, sid + ".png")
         profile = tempfile.mkdtemp(prefix="wf-chrome-")

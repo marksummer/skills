@@ -14,7 +14,7 @@ Use this shape as a guide:
 > - [Issue and impact]. Use [existing replacement]. [Location or report anchor].
 > - [Issue and impact]. Fix [shared owner], affecting [known usages].
 >
-> Before and after: [inline comparison of current UI and supported proposed fixes, with provenance labels].
+> Before and after, when relevant: [inline comparison of current UI and supported proposed fixes, with provenance labels].
 >
 > Needs review: [ambiguous candidates].
 > System gaps: [missing reusable support; proposals only].
@@ -25,7 +25,7 @@ Use this shape as a guide:
 
 Omit empty categories, unknown counts, and unsupported comparisons. If no drift is confirmed, limit that conclusion to the inspected scope. State when no established system or usable baseline exists. Give a prioritized fix list without starting implementation or asking for approval after each audit.
 
-Include the visual comparison in the final response using [visual comparison guidance](visual-comparison.md). If no supported fixes exist, say so and omit the after view. If tools or no-write constraints prevent a visual, explain the specific limit and return the audit.
+When the evidence calls for a comparison, use [visual comparison guidance](visual-comparison.md). If a visual is needed and tools or no-write constraints prevent it, explain the specific limit and return the audit.
 
 ## Evidence
 
@@ -42,6 +42,8 @@ For each grouped finding, record:
 - Behavior, accessibility, responsive, and theme considerations for implementation.
 
 Classify absent reusable support as a system gap. Recommend review or design work separately from replacement with an existing component. A gap can coexist with an independently evidenced violation; do not count the same observation twice.
+
+For example, a neutral hint using `--danger-text` is confirmed drift when the system assigns supporting text to `--text-secondary`. Cite the hint binding, both roles, and the neutral replacement. The light-theme colors can match while theme definitions change independently. Leave a nearby `16px` icon size out of confirmed drift unless an applicable size rule is violated.
 
 ## Detailed report
 

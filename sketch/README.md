@@ -17,6 +17,8 @@ with adding, removing, and pasting multiple lines.
 
 Describe the element and the decision you want to make. Add screenshots or product context if you have them. Ask for a comparison, full screen, or flow when that is the scope you need.
 
+To compare visual choices in place, ask for the same sketch with a local switch. For example, compare two accent palettes on the same reminder picker while keeping its layout and behavior fixed.
+
 ## What you get
 
 A sketch with readable sample content and working local interactions. Revisions keep the choices you have already made. Actions are simulated; a sketch does not save data to your product or publish it.

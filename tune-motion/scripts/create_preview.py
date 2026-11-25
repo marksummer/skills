@@ -47,7 +47,12 @@ def parser():
     p.add_argument('--markup', type=Path, required=True, help='Component HTML/CSS fragment')
     p.add_argument('--adapter', type=Path, required=True, help='JS body returning a pose renderer')
     p.add_argument('--output', type=Path, required=True, help='Writable visualization fragment path')
-    p.add_argument('--preset', choices=PRESETS, default='EASE_OUT')
+    motion = p.add_mutually_exclusive_group()
+    motion.add_argument('--preset', choices=PRESETS, help='Built-in easing or spring; default EASE_OUT')
+    motion.add_argument('--bezier', type=float, nargs=4, metavar=('X1', 'Y1', 'X2', 'Y2'),
+                        help='Custom cubic Bézier control points')
+    motion.add_argument('--spring', type=float, nargs=3, metavar=('MASS', 'STIFFNESS', 'DAMPING'),
+                        help='Custom spring parameters; duration is derived from them')
     p.add_argument('--duration', type=float, help='Bezier duration in ms; default 300')
     p.add_argument('--force', action='store_true', help='Replace an existing generated preview')
     return p
@@ -60,8 +65,23 @@ def create(args):
     key = args.key or re.sub(r'[^a-z0-9]+', '-', name.lower()).strip('-')
     if not key or len(key) > 100 or not re.fullmatch(r'[a-z0-9]+(?:-[a-z0-9]+)*', key):
         raise ValueError('Use a nonempty lowercase-hyphenated --key (at most 100 characters)')
-    if args.preset in SPRINGS and args.duration is not None:
-        raise ValueError('Spring preset duration comes from physics; omit --duration')
+    style = args.preset or 'EASE_OUT'
+    curve = [0, 0, .58, 1]
+    spring = {'mass': 1, 'stiffness': 100, 'damping': 15}
+    if args.bezier is not None:
+        x1, y1, x2, y2 = args.bezier
+        if not (0 <= x1 <= 1 and 0 <= x2 <= 1 and -3 <= y1 <= 4 and -3 <= y2 <= 4):
+            raise ValueError('Bézier x values must be between 0 and 1 and y values between -3 and 4')
+        style = 'CUSTOM_CUBIC_BEZIER'
+        curve = args.bezier
+    if args.spring is not None:
+        mass, stiffness, damping = args.spring
+        if not (.1 <= mass <= 10 and 1 <= stiffness <= 10000 and 1 <= damping <= 1000):
+            raise ValueError('Spring mass must be between 0.1 and 10, stiffness between 1 and 10000, and damping between 1 and 1000')
+        style = 'CUSTOM_SPRING'
+        spring = {'mass': mass, 'stiffness': stiffness, 'damping': damping}
+    if (style in SPRINGS or style == 'CUSTOM_SPRING') and args.duration is not None:
+        raise ValueError('Spring duration comes from physics; omit --duration')
     duration = 300 if args.duration is None else args.duration
     if not math.isfinite(duration) or not 100 <= duration <= 120000:
         raise ValueError('Duration must be finite and between 100 and 120000 ms')
@@ -86,12 +106,8 @@ def create(args):
     result = region(result, 'adapter', adapter)
     subject = {'key': key, 'name': name, 'description': args.description.strip()}
     result = region(result, 'subject', ' const subject=' + js_json(subject) + ';')
-    initial = {'style': args.preset, 'duration': duration, 'curve': [0, 0, .58, 1],
-               'spring': {'mass': 1, 'stiffness': 100, 'damping': 15}}
+    initial = {'style': style, 'duration': duration, 'curve': curve, 'spring': spring}
     result = region(result, 'initial', js_json(initial))
-    if args.preset in SPRINGS:
-        result = result.replace('if(isSpring())syncSpringDuration();restore(window.openai?.widgetState);',
-                                's.spring=copy(springs[s.style]);syncSpringDuration();restore(window.openai?.widgetState);', 1)
     scene_label = args.description.strip() or f'Animated {name}'
     result = result.replace('aria-label="A large panel moves between start and finish to demonstrate the selected motion curve"',
                             'aria-label="' + html.escape(scene_label, quote=True) + '"', 1)

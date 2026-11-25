@@ -28,7 +28,7 @@ Run this in your project, then choose Codex and the skills you want. Requires No
 | Skill | What else you need |
 | --- | --- |
 | Sketch | The Visualize plugin in Codex for interactive previews. Without it, you get a layout outline. |
-| Clean Up | No extra dependency. Uses Impeccable when it is already installed. |
+| Clean Up | No extra dependency. Can consult installed Impeccable guidance for broader layout changes. |
 | Tune Motion | The Visualize plugin in Codex and Python 3 for the preview generator. |
 | Haptic Scout | No extra dependency. Framer audits need a connected Framer MCP. |
 | Audit | Available capture and rendering tools for visual comparisons. Framer audits need a connected Framer MCP. |

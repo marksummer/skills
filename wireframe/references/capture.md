@@ -1,6 +1,6 @@
 # Capture the design
 
-Save one image per screen in flow order in a `shots/` folder beside the boards file. PNG and JPEG both work. These images provide the Design view for comparison.
+Save one PNG or JPEG per screen in flow order in a `shots/` folder beside the boards file. These images provide the Design view for comparison.
 
 Measure the files before drawing:
 
@@ -9,7 +9,7 @@ python3 <skill-dir>/scripts/build.py --measure shots/*.png
 # shots/home.png: 1206 x 2622 px | as phone: 402 pt wide at @3x, board height 874
 ```
 
-Use the reported point width for the board. Set `data-width` if it differs from 390. Divide pixel measurements by the image scale factor.
+Set `data-device` from the source and use the capture's known logical width as `data-width`. If only the export scale is known, divide the measured width and other pixel distances by that scale. Use the helper's suggested device and scale only when source geometry is missing. For example, a 1200 px-wide desktop capture at 1× is a 1200-wide desktop board even if the helper suggests 400 pt at 3×. Verify the resulting geometry in Overlay.
 
 ## Supplied images
 
@@ -60,4 +60,4 @@ adb exec-out screencap -p > shots/home.png
 
 ## Source without a running app
 
-Ask whether the user can run the app or provide screenshots. If neither is possible and they agree, draw from source and omit `data-design`. The Design view will show a placeholder; explain that in the reply.
+Ask whether the user can run the app or provide screenshots. If neither is possible and they agree, draw from source and omit `data-design`. The Design view will show a placeholder. Identify it as a missing original in the reply.

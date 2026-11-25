@@ -21,11 +21,11 @@ Point it at the codebase, a screen, or an interaction. It checks when the cue wo
 
 A short list of moments worth considering, with the reason for each cue, what it would feel like, and how strongly it is recommended.
 
-### Swipe to delete a saved draft
+### Arming Archive with a swipe
 
-- **Why** — A cue before the delete point gives you time to pull back.
-- **Haptic** — On supported iPhones, a soft build as you approach the cutoff and one firm click as you cross it.
-- **Strongly recommended**
+- **Why** — A tick tells you when releasing the swipe will archive the message.
+- **Haptic** — On supported iPhones, one short system selection tick when Archive arms. Keep the visible and accessible armed state when vibration is unavailable.
+- **Recommended**
 
 The audit is read-only. Ask to implement a suggestion when you are ready.
 
